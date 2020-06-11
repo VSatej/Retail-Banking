@@ -1,4 +1,12 @@
-{% block title %}{% endblock %}
+{% block title %}Register Page{% endblock %}
 {% block body %}
     <h1>Register</h1>
+    <form action="register" method="POST">
+        <label title="name">Name: </label>
+        <input type="text" name="name" placeholder="user name" required=true><br><br>
+        <label title="password">Password: </label>
+        <input type="password" name="paswd" placeholder="password" required=true><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    {{ msg }}
 {% endblock %}
