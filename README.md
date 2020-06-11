@@ -1,2 +1,2 @@
-# Retail-Banking-
+# Retail-Banking
 TCS Xplore Case Study
