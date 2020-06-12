@@ -1,11 +1,31 @@
+"""
+    CREATE DATABASE xplore;
 
-cursor = db.cursor()
-try:
-    cursor = cursor.execute("")
-    records = cursor.fetchall()
-    for rec in records:
-        print(rec)
-except pymysql.Error as e:
-    print(e)
+    USE xplore;
 
-db.close()
+    CREATE TABLE CUSTOMERSTATUS(
+        SSN-ID INT NOT NULL PRIMARY KEY,
+        CUSTOMER-ID INT NOT NULL,
+        STATUS VARCHAR(20) NOT NULL,
+        MESSAGE VARCHAR(20) NOT NULL,
+        LAST-UPDATED VARCHAR(20) NOT NULL
+    );
+
+    CREATE TABLE ACCOUNTSTATUS(
+        CUSTOMER-ID INT NOT NULL,
+        ACCOUNT-ID INT NOT NULL,
+        ACCOUNT-TYPE VARCHAR(20) NOT NULL,
+        STATUS VARCHAR(20) NOT NULL,
+        MESSAGE VARCHAR(20) NOT NULL,
+        LAST-UPDATED VARCHAR(20) NOT NULL
+    );
+
+    DESCRIBE CUSTOMERSTATUS;
+
+    DESCRIBE ACCOUNTSTATUS;
+
+    SELECT * FROM CUSTOMERSTATUS;
+
+    SELECT * FROM ACCOUNTSTATUS;
+
+"""

@@ -2,4 +2,19 @@
 {% block body %}
     <h1>Hi {{ name }} </h1>
     {{ msg }}
+    <form action="login" method="POST">
+        <label title="name">Ssn Id: </label>
+        <input type="number" name="ssn-id" required=true><br><br>
+        <label title="name">Customer Id: </label>
+        <input type="number" name="cust-id" required=true><br><br>
+        <label title="name">Name: </label>
+        <input type="text" name="name" required=true><br><br>
+        <label title="name">Date: </label>
+        <input type="date" name="date" required=true><br><br>
+        <label title="name">Address: </label>
+        <input type="text" name="address" required=true><br><br>
+        <label title="name">Age: </label>
+        <input type="number" name="age" required=true><br><br>
+        <button type="submit">Submit</button>
+    </form>
 {% endblock %}

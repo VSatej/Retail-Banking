@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request
-import pymysql
 from Bank import Bank
+#import pymysql
 
 app = Flask(__name__)
 
@@ -19,6 +19,14 @@ def register():
 
 @app.route('/login',methods=['POST','GET'])
 def login():
+    if request.method == 'POST':
+        ssn_id = request.form['ssd-id']
+        cust_id = request.form['cust-id']
+        name = request.form['name']
+        date = request.form['date']
+        address = request.form['address']
+        age = request.form['age']
+        #Bank.create(ssn_id,cust_id,name,date,address,age)
     return render_template('login.html')
 
 if __name__ == '__main__':
