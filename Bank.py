@@ -7,7 +7,6 @@ class Bank:
     def create(self):
         db = connect.db_connect()
         connect.db_create(db)
-        pass
 
     def update(self):
         db = connect.db_connect()
