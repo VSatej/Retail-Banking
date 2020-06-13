@@ -1,38 +1,48 @@
-from database import connect
+from database import db_handler
 
 class Bank:
-    def check_password(self,name,paswd):
-        db = connect.db_connect()
+    def __init__(self):
+        self.db = db_handler.get_instance()
 
-    def create(self):
-        db = connect.db_connect()
-        connect.db_create(db)
+    
+        
 
-    def update(self):
-        db = connect.db_connect()
-        connect.db_update(db)
-        pass
+bank = Bank()
 
-    def delete(self):
-        db = connect.db_connect()
-        connect.db_delete(db)
-        pass
 
-    def view(self):
-        db = connect.db_connect(db)
-        connect.db_view(db)
-        pass
+# class Bank:
+#     def check_password(self,name,paswd):
+#         db = connect.db_connect()
 
-    def status(self):
-        pass
+#     def create(self):
+#         db = connect.db_connect()
+#         connect.db_create(db)
 
-    def deposit(self):
-        pass
+#     def update(self):
+#         db = connect.db_connect()
+#         connect.db_update(db)
+#         pass
 
-    def withdraw(self):
-        pass
+#     def delete(self):
+#         db = connect.db_connect()
+#         connect.db_delete(db)
+#         pass
 
-    def transfer(self):
-        pass
+#     def view(self):
+#         db = connect.db_connect(db)
+#         connect.db_view(db)
+#         pass
+
+#     def status(self):
+#         pass
+
+#     def deposit(self):
+#         pass
+
+#     def withdraw(self):
+#         pass
+
+#     def transfer(self):
+#         pass
 
 
