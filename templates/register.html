@@ -1,12 +1,21 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
 {% block title %}Register Page{% endblock %}
 {% block body %}
     <h1>Register</h1>
     <form action="register" method="POST">
-        <label title="name">Name: </label>
-        <input type="text" name="name" required=true><br><br>
-        <label title="password">Password: </label>
-        <input type="password" name="paswd" required=true><br><br>
-        <button type="submit">Submit</button>
+    <div class="container">
+        <label for="name"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="name" required><br><br>
+        <label for="paswd"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="paswd" required><br><br>
+        <button type="submit">Login</button>
+    </div>
     </form>
     {{ msg }}
 {% endblock %}

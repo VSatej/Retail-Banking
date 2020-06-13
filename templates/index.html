@@ -1,3 +1,10 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
 {% block body %}
     <h1>Home Page</h1>
     <a href="{{ url_for('register') }}">Register</a>
