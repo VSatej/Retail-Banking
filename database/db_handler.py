@@ -160,3 +160,4 @@ class DBHandler:
         
         return result
 
+# mysqldump -u root -p xplore > database/data.sql

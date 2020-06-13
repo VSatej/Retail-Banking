@@ -1,6 +1,5 @@
 from flask import Flask,render_template,request
-from Bank import Bank
-#import pymysql
+# from Bank import Bank
 
 app = Flask(__name__)
 
