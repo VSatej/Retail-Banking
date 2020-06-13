@@ -73,8 +73,34 @@ class DBHandler:
         
         return result
 
+    def get_password(self, login):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT password FROM userstore WHERE login='{}'".format(login))
+        result = mycursor.fetchall()
+        
+        return result
+
+    
+    def add_user(self, login, password):
+        mycursor = self.db.cursor(self)
+        sql = "INSERT into userstore(login, password) VALUES(%s, %s)"
+        val = (login, password)
+        mycursor.execute(sql, val)
+        self.db.commit()
+
+    def get_users(self):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT login FROM userstore")
+        result = mycursor.fetchall()
+        
+        return result
+
     
 
 
 dbh = DBHandler()
-print(dbh.get_all_account_status())
+dbh.add_user("User01","qwerty")
+print(dbh.get_password("Rohan"))
+[print(x) for x in dbh.get_users()]

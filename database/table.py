@@ -3,10 +3,10 @@
 
     USE xplore;
 
-    CREATE TABBLE userstore(
-        Login VARCHAR(20) NOT NULL,
-        Password VARCHAR(20) NOT NULL,
-        TimeStamp TIMESTAMP NOT NULL
+    CREATE TABLE userstore(
+        login varchar(50) NOT NULL PRIMARY KEY,
+        password VARCHAR(20) NOT NULL,
+        time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE Customer(
@@ -18,8 +18,8 @@
     );
 
     CREATE TABLE Account(
-        Customer_ID INT NOT NULL ,
-        Account_ID INT NOT NULL,
+        Customer_ID INT NOT NULL,
+        Account_ID INT NOT NULL PRIMARY KEY,
         Balance INT NOT NULL,
         CR_Data INT NOT NULL,
         CR_LastDate Date NOT NULL,
