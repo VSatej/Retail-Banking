@@ -44,7 +44,11 @@ def deleteAccount():
 @app.route("/updateCustomer")
 def updateCustomer():
 	return render_template("updateCustomer.html")
-    
+
+@app.route("/deleteCustomer")
+def deleteCustomer():
+	return render_template("deleteCustomer.html")
+
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'

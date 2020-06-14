@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Delete Customer{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header.html" %}
+<br>
+<div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Delete Account</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" style="padding: auto">
+                <br>
+                 <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">SSN Id:</label>
+                    <div class="col-md-6">
+                        <!-- Customer SSN id 
+                        should come from database 
+                    
+                        -->
+                        <input type="number" class="form-control"style=" box-sizing: border-box;" value="123456" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Customer ID:</label>
+                    <div class="col-md-6">
+                        <!-- Customer SSN id  
+                        should come from database 
+                        
+                        -->
+                        <input type="number" class="form-control"style=" box-sizing: border-box;" value="10000" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Customer Name:</label>
+                    <div class="col-md-6">
+                        <!-- Customer name 
+                        should come from database 
+                        -->
+                        <input type="text" class="form-control"style=" box-sizing: border-box;" value="Name" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Age:</label>
+                    <div class="col-md-6">
+                        <!-- Age  
+                        should come from database 
+                        Eg: Current /Savings
+                        -->
+                        <input type="number" class="form-control"style=" box-sizing: border-box;" value="20" readonly>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Address:</label>
+                    <div class="col-md-6">
+                        <!-- This value determines the type of selected account 
+                        should come from database 
+                        Eg: Current /Savings
+                        -->
+                        <input type="text" class="form-control"style=" box-sizing: border-box;" value="address" readonly>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-6">
+                    <button type="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Confirm Delete</button>
+                    </div>
+                    <div class="col-md-6">
+                    <a href="/link-to/whatever-address/" name="cancel" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+{% include "footer.html" %}
+{% endblock %}
