@@ -39,6 +39,10 @@ def deleteAccount():
 @app.route("/updateCustomer")
 def updateCustomer():
 	return render_template("updateCustomer.html")
-    
+
+@app.route("/deleteCustomer")
+def deleteCustomer():
+	return render_template("deleteCustomer.html")
+
 if __name__ == '__main__':
     app.run(port=5000,debug=True)
