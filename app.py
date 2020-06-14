@@ -28,5 +28,17 @@ def login():
         #Bank.create(ssn_id,cust_id,name,date,address,age)
     return render_template('login.html')
 
+@app.route("/createAccount")
+def createAccount():
+	return render_template("createAccount.html")
+
+@app.route("/deleteAccount")
+def deleteAccount():
+	return render_template("deleteAccount.html")
+
+@app.route("/updateCustomer")
+def updateCustomer():
+	return render_template("updateCustomer.html")
+    
 if __name__ == '__main__':
     app.run(port=5000,debug=True)

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Delete Account Page{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header.html" %}
+<br>
+<div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Delete Account</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" style="padding: auto">
+                <br>
+                <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Account ID </label>
+                    <div class="col-md-6">
+                        <!-- This data should come from database 
+                        Account IDs of current customer should be displayed
+                        -->
+                        <select class="form-control">
+						  <option>Account ID 1</option>
+						  <option>Account ID 2</option>
+						</select>
+                    </div>
+                 </div>
+                 <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Account Type</label>
+                    <div class="col-md-6">
+                        <!-- This value determines the type of selected account 
+                        should come from database 
+                        Eg: Current /Savings
+                        -->
+                        <input type="text" class="form-control"style=" box-sizing: border-box;" value="Current" readonly>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Delete Account</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+{% include "footer.html" %}
+{% endblock %}
