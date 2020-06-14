@@ -12,20 +12,20 @@
           <ul class="dropdown-menu" style="background-color: #FFCC00">
             <li><a href="#"><b style="color:black">Create Customer</b> </a></li>
             <li role="presentation" class="divider"></li>
-            <li><a href="#"><b style="color:black">Update Customer</b></a></li>
+            <li><a href="{{ url_for('updateCustomer') }}"><b style="color:black">Update Customer</b></a></li>
             <li role="presentation" class="divider"></li>
-            <li><a href="#"><b style="color:black">Delete Customer</b></a></li>
+            <li><a href="{{ url_for('deleteCustomer') }}"><b style="color:black">Delete Customer</b></a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b style="color:black">Account Management
           <span class="caret"></span></b></a>
           <ul class="dropdown-menu" style="background-color: #FFCC00">
-            <li><a href="#"><b style="color:black">Create Account </b></a></li>
+            <li><a href="{{ url_for('createAccount') }}"><b style="color:black">Create Account </b></a></li>
             <li role="presentation" class="divider"></li>
             <li><a href="#"><b style="color:black">Update Account</b></a></li>
             <li role="presentation" class="divider"></li>
-            <li><a href="#"><b style="color:black">Delete Account</b></a></li>
+            <li><a href="{{ url_for('deleteAccount') }}"><b style="color:black">Delete Account</b></a></li>
           </ul>
         </li>
         <li class="dropdown">
