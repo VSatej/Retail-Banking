@@ -36,6 +36,7 @@ def login():
     return render_template('login.html', error=error)
 
 
+
 @app.route("/createAccount")
 def createAccount():
 	return render_template("createAccount.html")
@@ -51,6 +52,14 @@ def updateCustomer():
 @app.route("/deleteCustomer")
 def deleteCustomer():
 	return render_template("deleteCustomer.html")
+
+@app.route("/cashier_deposit")
+def cashier_deposit():
+	return render_template("cashier_deposit.html")
+
+@app.route("/cashier_withdraw")
+def cashier_withdraw():
+	return render_template("cashier_withdraw.html")
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
