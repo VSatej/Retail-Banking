@@ -12,8 +12,8 @@
     CREATE TABLE Customer(
         SSN_ID INT NOT NULL PRIMARY KEY,
         Customer_ID INT NOT NULL,
-        Name VARCHAR(20) NOT NULL,
-        Address VARCHAR(40) NOT NULL,
+        Name VARCHAR(40) NOT NULL,
+        Address VARCHAR(100) NOT NULL,
         Age INT NOT NULL
     );
 

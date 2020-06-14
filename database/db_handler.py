@@ -160,4 +160,54 @@ class DBHandler:
         
         return result
 
+
+    # Customer Table :
+    # +-------------+--------------+------+-----+---------+-------+
+    # | Field       | Type         | Null | Key | Default | Extra |
+    # +-------------+--------------+------+-----+---------+-------+
+    # | SSN_ID      | int          | NO   | PRI | NULL    |       |
+    # | Customer_ID | int          | NO   | UNI | NULL    |       |
+    # | Name        | varchar(40)  | NO   |     | NULL    |       |
+    # | Address     | varchar(100) | NO   |     | NULL    |       |
+    # | Age         | int          | NO   |     | NULL    |       |
+    # +-------------+--------------+------+-----+---------+-------+
+
+    def get_customer_from_Customer_ID(self, Customer_ID):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT * FROM Customer WHERE Customer_ID={}".format(Customer_ID))
+        result = mycursor.fetchall()
+        
+        return result
+
+
+    def add_customer(self, SSN_ID, Customer_ID, Name, Address, Age):
+        mycursor = self.db.cursor()
+
+        sql = "INSERT INTO Customer VALUES (%s, %s, %s, %s, %s)"
+        val = (SSN_ID, Customer_ID, Name, Address, Age)
+        mycursor.execute(sql, val)
+
+        self.db.commit()
+
+        print(mycursor.rowcount, "record inserted.")
+
+
+    def get_customer_from_SSN_ID(self, SSN_ID):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT * FROM Customer WHERE SSN_ID={}".format(SSN_ID))
+        result = mycursor.fetchall()
+        
+        return result
+
+    
+    def remove_customer(self, Customer_ID):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("DELETE from Customer WHERE Customer_ID={}".format(Customer_ID))
+        self.db.commit()
+
+        print(mycursor.rowcount, "record(s) deleted")
+
 # mysqldump -u root -p xplore > database/data.sql

@@ -43,6 +43,34 @@ INSERT INTO `AccountStatus` VALUES (1,123,'test','test','test','test');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Customer`
+--
+
+DROP TABLE IF EXISTS `Customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Customer` (
+  `SSN_ID` int NOT NULL,
+  `Customer_ID` int NOT NULL,
+  `Name` varchar(40) NOT NULL,
+  `Address` varchar(100) NOT NULL,
+  `Age` int NOT NULL,
+  PRIMARY KEY (`SSN_ID`),
+  UNIQUE KEY `Customer_ID` (`Customer_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Customer`
+--
+
+LOCK TABLES `Customer` WRITE;
+/*!40000 ALTER TABLE `Customer` DISABLE KEYS */;
+INSERT INTO `Customer` VALUES (123,123,'Rohan','Pune',21);
+/*!40000 ALTER TABLE `Customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `CustomerStatus`
 --
 
@@ -103,4 +131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-13 13:18:29
+-- Dump completed on 2020-06-14 13:10:36

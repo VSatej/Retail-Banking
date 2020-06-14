@@ -9,6 +9,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+
 @app.route('/register',methods=['POST','GET'])
 def register():
     if request.method == 'POST':
@@ -17,6 +18,7 @@ def register():
         #Bank.check_password(name,paswd)
         return render_template('login.html',name=name,msg="Successfully Logged In")
     return render_template('register.html')
+
 
 @app.route('/login',methods=['POST',"GET"])
 def login():
@@ -32,6 +34,7 @@ def login():
         else:
             error = "Invalid Credentials"
     return render_template('login.html', error=error)
+
 
 @app.route("/createAccount")
 def createAccount():
