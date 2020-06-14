@@ -11,7 +11,10 @@
     <div class="panel panel-default" style="border: 2px solid #433937;width:25%;margin:13% auto">
         <div class="panel-heading" style="background-image:none;background:#433937;color:white"><b>Login </b></div>
         <div class="panel-body">
-            <form class="form-horizontal" style="border:0px">
+        {% if error %}
+            <p class=error><strong>Error:</strong> {{ error }}
+        {% endif %}
+            <form class="form-horizontal" style="border:0px" method="POST">
                 <br>
                 <div class="form-group">
                     

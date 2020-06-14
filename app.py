@@ -1,4 +1,6 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,flash,redirect,url_for,session
+# from flask.ext.session import Session
+from database.db_handler import DBHandler
 # from Bank import Bank
 
 app = Flask(__name__)
@@ -16,17 +18,20 @@ def register():
         return render_template('login.html',name=name,msg="Successfully Logged In")
     return render_template('register.html')
 
-@app.route('/login',methods=['POST','GET'])
+@app.route('/login',methods=['POST',"GET"])
 def login():
+    error = None
     if request.method == 'POST':
-        ssn_id = request.form['ssd-id']
-        cust_id = request.form['cust-id']
-        name = request.form['name']
-        date = request.form['date']
-        address = request.form['address']
-        age = request.form['age']
-        #Bank.create(ssn_id,cust_id,name,date,address,age)
-    return render_template('login.html')
+        login = request.form["username"]
+        password = request.form["password"]
+        db = DBHandler()
+        server_pass = db.get_password(login)
+        if len(server_pass) is not 0 and server_pass[0][0] == password:
+            flash('Logged In Successfully')
+            return render_template("createAccount.html")
+        else:
+            error = "Invalid Credentials"
+    return render_template('login.html', error=error)
 
 @app.route("/createAccount")
 def createAccount():
@@ -41,4 +46,9 @@ def updateCustomer():
 	return render_template("updateCustomer.html")
     
 if __name__ == '__main__':
-    app.run(port=5000,debug=True)
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
+
+    app.debug = True
+    app.run()
+    
