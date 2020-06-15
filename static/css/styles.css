@@ -47,3 +47,24 @@ h2{
 }
 
 
+table.table-bordered td,th{
+	text-align: center;
+}
+
+table.table-bordered th{
+	background-color: #FFBB07;
+}
+
+table.table-bordered{
+    border: 2px solid black;
+}
+
+table.table-bordered > thead > tr > th{
+    border:	2px solid black;
+    color: black;
+}
+
+table.table-bordered > tbody > tr > td{
+    border:2px solid black;
+    color: black;
+}
