@@ -238,6 +238,14 @@ def cashier_deposit():
         return redirect(request.url) 
     return render_template("cashier_deposit.html")
 
+@app.route("/createCustomer",methods=['POST','GET'])
+def createCustomer():
+    return render_template("createCustomer.html")
+
+@app.route("/customerStatus",methods=['POST','GET'])
+def customerStatus():
+    return render_template("customerStatus.html")
+
 @app.route("/cashier_withdraw",methods=['POST','GET'])
 def cashier_withdraw():
     if request.method == 'POST':

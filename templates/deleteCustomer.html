@@ -8,6 +8,7 @@
 {% endblock %}
 {% block body %}
 {% include "header.html" %}
+<div style="flex-grow: 1">
 <!--
     here error msg should be displayed if customer not found
 -->
@@ -121,5 +122,6 @@
     </div>
     <br>
     {%endif%}
+    </div>
 {% include "footer.html" %}
 {% endblock %}

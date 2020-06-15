@@ -11,7 +11,7 @@
 <!--
     here error msg should be displayed if customer not found
 -->
-
+<div style="flex-grow: 1">
 <div class="panel panel-default" style="border: 0px;width:60%;background:white;margin:auto;padding-top:2%">
         <div class="panel-body" style="border: 0px">
         {% if error %}
@@ -138,5 +138,6 @@
     </div>
     <br>
     {% endif %}
+    </div>
 {% include "footer.html" %}
 {% endblock %}

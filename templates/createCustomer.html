@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Create Customer{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+    <script type="text/javascript">
+        var citiesByState = {
+        Odisha: ["Bhubaneswar","Puri","Cuttack"],
+        Maharashtra: ["Mumbai","Pune","Nagpur"],
+        Kerala: ["kochi","Kanpur"]
+        }
+        function makeSubmenu(value) {
+        if(value.length==0) document.getElementById("city").innerHTML = "<option></option>";
+        else {
+        var citiesOptions = "";
+        for(cityId in citiesByState[value]) {
+        citiesOptions+="<option>"+citiesByState[value][cityId]+"</option>";
+        }
+        document.getElementById("city").innerHTML = citiesOptions;
+        }
+        }
+    </script>
+{% endblock %}
+{% block body %}
+{% include "header.html" %}
+<div style="flex-grow: 1">
+<br>
+<div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Create Customer Screen</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" style="padding: auto" method="POST" action="" name="update_form">
+                <br>
+                <div class="form-group required">
+                    <label class="control-label col-md-5 " style="text-align: left;">Customer SSN ID </label>
+                    <div class="col-md-7">
+                        <input type="number" class="form-control" name="cust_ssn_id" style=" box-sizing: border-box;" required>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-md-5 " style="text-align: left;">Customer Name</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" name="cust_name" style=" box-sizing: border-box;" required >
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-md-5 " style="text-align: left;">Age</label>
+                    <div class="col-md-7">
+                        <input type="number" class="form-control" name="cust_age" style=" box-sizing: border-box;"  required>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-md-5 " style="text-align: left;">Address</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" name="cust_address" style=" box-sizing: border-box;" required>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-md-5 " style="text-align: left;">State</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="state" onchange="makeSubmenu(this.value)">
+                                <option value="" disabled selected>Choose State</option>
+                                <option>Odisha</option>
+                                <option>Maharashtra</option>
+                                <option>Kerala</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-md-5 " style="text-align: left;">City</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="city">
+                            <option value="" disabled selected>Choose City</option>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>    
+                <div class="form-group">
+                    <label class="control-label col-md-7" style="text-align: left;color: red">(*)Fields are compulsory</label>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-6">
+                    <button type="submit" name="sub_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px;padding-left:25px;padding-right:25px;">Submit</button>
+                    </div>
+                    <div class="col-md-6">
+                    <button type="reset" name="reset_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px;padding-left:25px;padding-right:25px;">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{% include "footer.html" %}
+{% endblock %}
+

@@ -9,6 +9,7 @@
 {% block body %}
 {% include "header.html" %}
 <br>
+<div style="flex-grow: 1">
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Create Account</b></div>
         {% if error %}
@@ -56,6 +57,7 @@
         </div>
     </div>
     <br>
+    </div>
 {% include "footer.html" %}
 {% endblock %}
 
