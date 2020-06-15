@@ -29,9 +29,12 @@ def login():
         server_pass = db.get_password(login)
         if len(server_pass) is not 0 and server_pass[0][0] == password:
             flash('Logged In Successfully')
-            return render_template("createAccount.html")
+            return render_template('client.html',name=login)
         else:
             error = "Invalid Credentials"
+            return redirect(request.url)
+        if login == 'admin' and password=='admin@123':
+            render_template('admin.html')
     return render_template('login.html', error=error)
 
 @app.route("/createAccount",methods=['POST','GET'])
@@ -41,8 +44,7 @@ def createAccount():
         account_type = request.form['']
         deposit = request.form['']
         #Bank.createAccount()
-        return redirect(request.url)
-	return render_template("createAccount.html",name)
+    return render_template("createAccount.html")
 
 @app.route("/deleteAccount",methods=['POST','GET'])
 def deleteAccount():
@@ -51,7 +53,7 @@ def deleteAccount():
         account_type = request.form['']
         #Bank.deleteAccount()
         return redirect(request.url)
-	return render_template("deleteAccount.html")
+    return render_template("deleteAccount.html")
 
 @app.route("/updateCustomer",methods=['POST','GET'])
 def updateCustomer():
@@ -62,7 +64,7 @@ def updateCustomer():
         #Bank.createAccount(new_name.new_age,new_address)
         return redirect(request.url)
     #Bank.accountDetails()
-	return render_template("updateCustomer.html",ssn_id,cust_id,name,address,age)
+    return render_template("updateCustomer.html",ssn_id,cust_id,name,address,age)
 
 @app.route("/deleteCustomer",methods=['POST','GET'])
 def deleteCustomer():
@@ -74,7 +76,7 @@ def deleteCustomer():
         address = request.form['']
         #Bank.deleteCustomer(ssn_id,cust_id,name,age,address)
         return redirect(request.url) 
-	return render_template("deleteCustomer.html")
+    return render_template("deleteCustomer.html")
 
 @app.route("/deleteAccount",methods=['POST','GET'])
 def deleteCustomer():
@@ -83,7 +85,7 @@ def deleteCustomer():
         account_type = request.form['']
         #Bank.deleteAccount(account_id,account_type)
         return redirect(request.url) 
-	return render_template("deleteAccount.html")
+    return render_template("deleteAccount.html")
 
 @app.route("/accountSearch",methods=['POST','GET'])
 def search():
@@ -92,7 +94,7 @@ def search():
         customer_id = request.form['']
         #Bank.accountSearch()
         return redirect(request.url) 
-	return render_template("accountSearch.html")
+    return render_template("accountSearch.html")
 
 @app.route("/customerSearch",methods=['POST','GET'])
 def search():
@@ -101,7 +103,7 @@ def search():
         customer_id = request.form['']
         #Bank.customerSearch()
         return redirect(request.url) 
-	return render_template("customerSearch.html")
+    return render_template("customerSearch.html")
 
 @app.route("/cashier_deposit",methods=['POST','GET'])
 def cashier_deposit():
@@ -112,7 +114,7 @@ def cashier_deposit():
         balance = request.form['']
         #Bank.deposit()
         return redirect(request.url) 
-	return render_template("cashier_deposit.html")
+    return render_template("cashier_deposit.html")
 
 @app.route("/cashier_withdraw",methods=['POST','GET'])
 def cashier_withdraw():
@@ -123,7 +125,7 @@ def cashier_withdraw():
         balance = request.form['']
         #Bank.withdraw()
         return redirect(request.url) 
-	return render_template("cashier_withdraw.html")
+    return render_template("cashier_withdraw.html")
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
