@@ -11,9 +11,16 @@
 <!--
     here error msg should be displayed if customer not found
 -->
+
 <div class="panel panel-default" style="border: 0px;width:60%;background:white;margin:auto;padding-top:2%">
         <div class="panel-body" style="border: 0px">
-            <form class="form-horizontal" style="padding: auto" name="data_fetch">
+        {% if error %}
+        <center><p class=error><strong>Error:</strong> {{ error }}<center>
+{% endif %}
+{% if message %}
+        <center><p class=error><strong>Messaage:</strong> {{ message }}<center>
+{% endif %}
+            <form class="form-horizontal" style="padding: auto" name="data_fetch" method="POST">
                 <br>
                  <div class="form-group required">
                     <label class="control-label col-md-3" style="text-align: right;">Customer SSN ID : </label>
@@ -49,7 +56,7 @@
     <!--
         User has to edit atleast one of the fields
         If user has not edited atleast one field proper message should be displayed
-    -->
+    -->{% if ssn_id %}
 
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Update Customer</b></div>
@@ -62,7 +69,7 @@
                             <!-- 
                                 This label should display the Customer SSN ID
                             -->
-                        <label class="control-label" name="cust_ssn_id" style="text-align: left;">80000</label>
+                        <input class="form-control" name="ssn_id" value={{ssn_id}} style=" box-sizing: border-box;" readonly>
                     </div>
                 </div>
                 <div class="form-group">
@@ -71,7 +78,7 @@
                             <!-- 
                                 This label should display the Customer ID
                             -->
-                        <label class="control-label" name="cust_id"  style="text-align: left;">1000</label>
+                        <input class="form-control" name="cust_id" value={{cust_id}} style=" box-sizing: border-box;" readonly>
                     
                     </div>
                 </div>
@@ -81,25 +88,25 @@
                             <!-- 
                                 This label should display the Customer Old name
                             -->
-                        <label class="control-label" name="cust_old_name" style="text-align: left;">Old Customer name</label>
+                        <label class="control-label" name="cust_old_name" style="text-align: left;">{{name}}</label>
                     </div>
                 </div>
                 <div class="form-group required">
                     <label class="control-label col-md-5 " style="text-align: left;">New Customer Name</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="cust_new_name" style=" box-sizing: border-box;" >
+                        <input type="text" class="form-control" name="cust_new_name" style=" box-sizing: border-box;" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-5" style="text-align: left;">Old Address</label>
                     <div class="col-md-6">
-                        <label class="control-label" name="cust_old_address" style="text-align: left;">Old Address</label>
+                        <label class="control-label" name="cust_old_address" style="text-align: left;">{{address}}</label>
                     </div>
                 </div>
                 <div class="form-group required">
                     <label class="control-label col-md-5" style="text-align: left;">New Address</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="cust_new_address" style=" box-sizing: border-box;" >
+                        <input type="text" class="form-control" name="cust_new_address" style=" box-sizing: border-box;" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -108,13 +115,13 @@
                             <!-- 
                                 This label should display the Customer Old name
                             -->
-                        <label class="control-label" name="cust_old_age" style="text-align: left;">Old Age</label>
+                        <label class="control-label" name="cust_old_age" style="text-align: left;">{{age}}</label>
                     </div>
                 </div>
                 <div class="form-group required">
                     <label class="control-label col-md-5" style="text-align: left;">New Age</label>
                     <div class="col-md-6">
-                        <input type="number" class="form-control" name="cust_new_age" style=" box-sizing: border-box;" >
+                        <input type="number" class="form-control" name="cust_new_age" style=" box-sizing: border-box;" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -130,5 +137,6 @@
         </div>
     </div>
     <br>
+    {% endif %}
 {% include "footer.html" %}
 {% endblock %}

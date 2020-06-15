@@ -27,7 +27,7 @@ def login():
         password = request.form["password"]
         db = DBHandler()
         server_pass = db.get_password(login)
-        if len(server_pass) is not 0 and server_pass[0][0] == password:
+        if len(server_pass) != 0 and server_pass[0][0] == password:
             flash('Logged In Successfully')
             return render_template('client.html',name=login)
         else:
@@ -57,14 +57,45 @@ def deleteAccount():
 
 @app.route("/updateCustomer",methods=['POST','GET'])
 def updateCustomer():
+    error = None
     if request.method == 'POST':
-        new_name = request.form['']
-        new_age = request.form['']
-        new_address = request.form['']
-        #Bank.createAccount(new_name.new_age,new_address)
-        return redirect(request.url)
+        di = request.form.to_dict()
+        if "update_ssn_id" in di.keys():
+            SSN_ID = request.form["update_ssn_id"]
+            Customer_ID = request.form["update_acc_id"]
+            if not SSN_ID and not Customer_ID:
+                error = "Enter either Customer ID or SSN ID to fetch acount"
+                return render_template("updateCustomer.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+            elif SSN_ID:
+                db = DBHandler()
+                customer = db.get_customer_from_SSN_ID(SSN_ID)
+                if len(customer) == 0:
+                    error = "Invalid SSN ID"
+                    return render_template("updateCustomer.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                else:
+                    return render_template("updateCustomer.html",ssn_id=SSN_ID,cust_id=customer[0][1],name=customer[0][2],address=customer[0][3],age=customer[0][4])
+            elif Customer_ID:
+                db = DBHandler()
+                customer = db.get_customer_from_Customer_ID(Customer_ID)
+                if len(customer) == 0:
+                    error = "Invalid Customer ID"
+                    return render_template("updateCustomer.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                else:
+                    return render_template("updateCustomer.html",ssn_id=customer[0][0],cust_id=customer[0][1],name=customer[0][2],address=customer[0][3],age=customer[0][4])
+
+        elif "cust_new_name" in di.keys():
+            new_name = request.form['cust_new_name']
+            new_age = request.form['cust_new_age']
+            new_address = request.form['cust_new_address']
+            Customer_ID = request.form["cust_id"]
+            if new_name and new_age and new_address:
+                db = DBHandler()
+                db.update_customer_from_Customer_ID(Customer_ID, new_name, new_address, new_age)
+                return render_template("updateCustomer.html",ssn_id="",cust_id="",name="",address="",age="", error="", message="Updated Successfully!")
+
     #Bank.accountDetails()
     return render_template("updateCustomer.html",ssn_id="",cust_id="",name="",address="",age="")
+
 
 @app.route("/deleteCustomer",methods=['POST','GET'])
 def deleteCustomer():
