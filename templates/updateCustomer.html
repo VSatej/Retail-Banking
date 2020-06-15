@@ -8,11 +8,53 @@
 {% endblock %}
 {% block body %}
 {% include "header.html" %}
-<br>
+<!--
+    here error msg should be displayed if customer not found
+-->
+<div class="panel panel-default" style="border: 0px;width:60%;background:white;margin:auto;padding-top:2%">
+        <div class="panel-body" style="border: 0px">
+            <form class="form-horizontal" style="padding: auto" name="data_fetch">
+                <br>
+                 <div class="form-group required">
+                    <label class="control-label col-md-3" style="text-align: right;">Customer SSN ID : </label>
+                    <div class="col-md-3">
+                        <!-- 
+                        User will enter this value
+                        -->
+                        <input type="number" minlength="9" style="text-align: left;"  maxlength="9" class="form-control"style=" box-sizing: border-box" value="Current" name="update_ssn_id">
+                    </div>
+                    <label class="control-label- col-md-1" style="text-align: center;padding: 1%;text-align: center">OR</label>
+                    <label class="control-label col-md-2">Customer ID : </label>
+                    <div class="col-md-3">
+                        <!-- 
+                            User will enter this value
+                        -->
+                        <input type="number" minlength="9" maxlength="9" class="form-control"style=" box-sizing: border-box;" value="Current" name="update_acc_id">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" name="sub_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <!-- 
+    If record exists then below html code will be displayed
+
+    -->
+    <!--
+        User has to edit atleast one of the fields
+        If user has not edited atleast one field proper message should be displayed
+    -->
+
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Update Customer</b></div>
         <div class="panel-body">
-            <form class="form-horizontal" style="padding: auto" method="POST" action="">
+            <form class="form-horizontal" style="padding: auto" method="POST" action="" name="update_form">
                 <br>
                 <div class="form-group">
                     <label class="control-label col-md-5" style="text-align: left">Customer SSN ID </label>
@@ -20,7 +62,7 @@
                             <!-- 
                                 This label should display the Customer SSN ID
                             -->
-                        <label class="control-label" style="text-align: left;">80000</label>
+                        <label class="control-label" name="cust_ssn_id" style="text-align: left;">80000</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -29,7 +71,7 @@
                             <!-- 
                                 This label should display the Customer ID
                             -->
-                        <label class="control-label" style="text-align: left;">1000</label>
+                        <label class="control-label" name="cust_id"  style="text-align: left;">1000</label>
                     
                     </div>
                 </div>
@@ -39,25 +81,25 @@
                             <!-- 
                                 This label should display the Customer Old name
                             -->
-                        <label class="control-label" style="text-align: left;">Old Customer name</label>
+                        <label class="control-label" name="cust_old_name" style="text-align: left;">Old Customer name</label>
                     </div>
                 </div>
                 <div class="form-group required">
                     <label class="control-label col-md-5 " style="text-align: left;">New Customer Name</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="customer_new_name" style=" box-sizing: border-box;" required >
+                        <input type="text" class="form-control" name="cust_new_name" style=" box-sizing: border-box;" >
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-5" style="text-align: left;">Old Address</label>
                     <div class="col-md-6">
-                        <label class="control-label" style="text-align: left;">Old Address</label>
+                        <label class="control-label" name="cust_old_address" style="text-align: left;">Old Address</label>
                     </div>
                 </div>
                 <div class="form-group required">
                     <label class="control-label col-md-5" style="text-align: left;">New Address</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="customer_new_address" style=" box-sizing: border-box;" required >
+                        <input type="text" class="form-control" name="cust_new_address" style=" box-sizing: border-box;" >
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,13 +108,13 @@
                             <!-- 
                                 This label should display the Customer Old name
                             -->
-                        <label class="control-label" style="text-align: left;">Old Age</label>
+                        <label class="control-label" name="cust_old_age" style="text-align: left;">Old Age</label>
                     </div>
                 </div>
                 <div class="form-group required">
                     <label class="control-label col-md-5" style="text-align: left;">New Age</label>
                     <div class="col-md-6">
-                        <input type="number" class="form-control" name="customer_age" style=" box-sizing: border-box;" required >
+                        <input type="number" class="form-control" name="cust_new_age" style=" box-sizing: border-box;" >
                     </div>
                 </div>
                 <div class="form-group">
@@ -81,7 +123,7 @@
                 <br>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
-                    <center><button type="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Update</button></center>
+                    <center><button type="submit" name="submit_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Update</button></center>
                     </div>
                 </div>
             </form>
