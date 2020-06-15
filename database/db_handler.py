@@ -254,13 +254,13 @@ class DBHandler:
 
 # mysqldump -u root -p xplore > database/data.sql
 
-db = DBHandler()
-db.add_customer(345, 345, "Viren", "Pune", 21)
-print(db.get_customer_from_Customer_ID(345))
-db.update_customer_from_Customer_ID(345,"Viren Pasalkar","Pune", 21)
-print(db.get_customer_from_Customer_ID(345))
-db.update_customer_from_SSN_ID(345, "Viren", "Pune", 21)
-print(db.get_customer_from_Customer_ID(345))
-db.remove_customer(345)
-print(db.get_customer_from_Customer_ID(345))
-[print(x) for x in db.get_all_customer_status()]
+# db = DBHandler()
+# db.add_customer(345, 345, "Viren", "Pune", 21)
+# print(db.get_customer_from_Customer_ID(345))
+# db.update_customer_from_Customer_ID(345,"Viren Pasalkar","Pune", 21)
+# print(db.get_customer_from_Customer_ID(345))
+# db.update_customer_from_SSN_ID(345, "Viren", "Pune", 21)
+# print(db.get_customer_from_Customer_ID(345))
+# db.remove_customer(345)
+# print(db.get_customer_from_Customer_ID(345))
+# [print(x) for x in db.get_all_customer_status()]
