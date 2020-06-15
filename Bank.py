@@ -14,16 +14,30 @@ bank = Bank()
 #     def check_password(self,name,paswd):
 #         db = connect.db_connect()
 
-#     def create(self):
+#     def createAccount(self):
 #         db = connect.db_connect()
 #         connect.db_create(db)
 
-#     def update(self):
+#     def updateAccount(self):
 #         db = connect.db_connect()
 #         connect.db_update(db)
 #         pass
 
-#     def delete(self):
+#     def deleteAccount(self):
+#         db = connect.db_connect()
+#         connect.db_delete(db)
+#         pass
+
+#     def createCustomer(self):
+#         db = connect.db_connect()
+#         connect.db_create(db)
+
+#     def updateCustomer(self):
+#         db = connect.db_connect()
+#         connect.db_update(db)
+#         pass
+
+#     def deleteCustomer(self):
 #         db = connect.db_connect()
 #         connect.db_delete(db)
 #         pass
