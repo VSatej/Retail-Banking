@@ -20,7 +20,7 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/login',methods=['POST',"GET"])
+@app.route('/login',methods=['POST'])
 def login():
     error = None
     if request.method == 'POST':

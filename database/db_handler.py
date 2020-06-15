@@ -42,22 +42,22 @@ class DBHandler:
     # Customer status and account status management :
     
     # CustomerStatus Table :
-    # +--------------+-------------+------+-----+---------+-------+
-    # | Field        | Type        | Null | Key | Default | Extra |
-    # +--------------+-------------+------+-----+---------+-------+
-    # | SSN_ID       | int         | NO   | PRI | NULL    |       |
-    # | Customer_ID  | int         | NO   |     | NULL    |       |
-    # | Status       | varchar(20) | NO   |     | NULL    |       |
-    # | Message      | varchar(20) | NO   |     | NULL    |       |
-    # | Last_Updated | varchar(20) | NO   |     | NULL    |       |
-    # +--------------+-------------+------+-----+---------+-------+
+    # +--------------+--------------+------+-----+-------------------+-------------------+
+    # | Field        | Type         | Null | Key | Default           | Extra             |
+    # +--------------+--------------+------+-----+-------------------+-------------------+
+    # | SSN_ID       | int          | NO   |     | NULL              |                   |
+    # | Customer_ID  | int          | NO   |     | NULL              |                   |
+    # | Status       | varchar(20)  | NO   |     | NULL              |                   |
+    # | Message      | varchar(100) | YES  |     | NULL              |                   |
+    # | Last_Updated | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+    # +--------------+--------------+------+-----+-------------------+-------------------+
 
 
-    def add_customer_status(self, SSN_ID, Customer_ID, Status, Message, Last_Updated):
+    def add_customer_status(self, SSN_ID, Customer_ID, Status, Message):
         mycursor = self.db.cursor()
 
-        sql = "INSERT INTO CustomerStatus (SSN_ID, Customer_ID, Status, Message, Last_Updated) VALUES (%s, %s, %s, %s, %s)"
-        val = (SSN_ID, Customer_ID, Status, Message, Last_Updated)
+        sql = "INSERT INTO CustomerStatus (SSN_ID, Customer_ID, Status, Message) VALUES (%s, %s, %s, %s)"
+        val = (SSN_ID, Customer_ID, Status, Message)
         mycursor.execute(sql, val)
 
         self.db.commit()
@@ -190,6 +190,10 @@ class DBHandler:
 
         self.db.commit()
 
+        status = "Active"
+        message = "Customer Created Successfully"
+        self.add_customer_status(SSN_ID, Customer_ID, status, message)
+
         print(mycursor.rowcount, "record inserted.")
 
 
@@ -205,9 +209,58 @@ class DBHandler:
     def remove_customer(self, Customer_ID):
         mycursor = self.db.cursor(self)
 
+        status = "Removed"
+        message = "Customer Removed Successfully"
+        SSN_ID = self.get_customer_from_Customer_ID(Customer_ID)[0][0]
+        self.add_customer_status(SSN_ID, Customer_ID, status, message)
+
         mycursor.execute("DELETE from Customer WHERE Customer_ID={}".format(Customer_ID))
         self.db.commit()
 
         print(mycursor.rowcount, "record(s) deleted")
 
+
+    def update_customer_from_Customer_ID(self, Customer_ID, name, address, age):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("UPDATE Customer SET name='{}',address='{}', age={} WHERE Customer_ID={}".format(name, address, age, Customer_ID))
+        self.db.commit()
+
+        status = "Active"
+        message = "Customer Update Complete"
+        SSN_ID = self.get_customer_from_Customer_ID(Customer_ID)[0][0]
+        self.add_customer_status(SSN_ID, Customer_ID, status, message)
+
+        print(mycursor.rowcount, "record(s) affected")
+
+    
+    def update_customer_from_SSN_ID(self, SSN_ID, name, address, age):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("UPDATE Customer SET name='{}',address='{}', age={} WHERE SSN_ID={}".format(name, address, age, SSN_ID))
+        self.db.commit()
+
+        status = "Active"
+        message = "Customer Update Complete"
+        Customer_ID = self.get_customer_from_SSN_ID(SSN_ID)[0][1]
+        self.add_customer_status(SSN_ID, Customer_ID, status, message)
+
+        print(mycursor.rowcount, "record(s) affected")
+
+
+    
+
+
+
 # mysqldump -u root -p xplore > database/data.sql
+
+db = DBHandler()
+db.add_customer(345, 345, "Viren", "Pune", 21)
+print(db.get_customer_from_Customer_ID(345))
+db.update_customer_from_Customer_ID(345,"Viren Pasalkar","Pune", 21)
+print(db.get_customer_from_Customer_ID(345))
+db.update_customer_from_SSN_ID(345, "Viren", "Pune", 21)
+print(db.get_customer_from_Customer_ID(345))
+db.remove_customer(345)
+print(db.get_customer_from_Customer_ID(345))
+[print(x) for x in db.get_all_customer_status()]

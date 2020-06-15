@@ -27,7 +27,7 @@
     );
 
     CREATE TABLE Transactions(
-        Customer_ID INT NOT NULL PRIMARY KEY,
+        Customer_ID INT NOT NULL,
         Account_Type VARCHAR(20) NOT NULL,
         Transaction_Date DATE NOT NULL,
         Source_AccountType VARCHAR(20) NOT NULL,
@@ -35,11 +35,11 @@
     );
 
     CREATE TABLE CustomerStatus(
-        SSN_ID INT NOT NULL PRIMARY KEY,
+        SSN_ID INT NOT NULL,
         Customer_ID INT NOT NULL,
         Status VARCHAR(20) NOT NULL,
-        Message VARCHAR(20) NOT NULL,
-        Last_Updated VARCHAR(20) NOT NULL
+        Message VARCHAR(100) NOT NULL,
+        Last_Updated DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE AccountStatus(
@@ -47,8 +47,8 @@
         Account_ID INT NOT NULL,
         Account_Type VARCHAR(20) NOT NULL,
         Status VARCHAR(20) NOT NULL,
-        Message VARCHAR(20) NOT NULL,
-        Last_Updated VARCHAR(20) NOT NULL
+        Message VARCHAR(10) NOT NULL,
+        Last_Updated DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
 """

@@ -81,9 +81,8 @@ CREATE TABLE `CustomerStatus` (
   `SSN_ID` int NOT NULL,
   `Customer_ID` int NOT NULL,
   `Status` varchar(20) NOT NULL,
-  `Message` varchar(20) NOT NULL,
-  `Last_Updated` varchar(20) NOT NULL,
-  PRIMARY KEY (`SSN_ID`)
+  `Message` varchar(100) DEFAULT NULL,
+  `Last_Updated` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -93,7 +92,7 @@ CREATE TABLE `CustomerStatus` (
 
 LOCK TABLES `CustomerStatus` WRITE;
 /*!40000 ALTER TABLE `CustomerStatus` DISABLE KEYS */;
-INSERT INTO `CustomerStatus` VALUES (1,123,'test','test','test');
+INSERT INTO `CustomerStatus` VALUES (123,123,'Active','Customer Update Complete','2020-06-15 04:27:34'),(345,345,'Active','Customer Created Successfully','2020-06-15 04:37:07'),(345,345,'Active','Customer Update Complete','2020-06-15 04:42:01'),(345,345,'Active','Customer Update Complete','2020-06-15 04:42:01'),(345,345,'Active','Customer Created Successfully','2020-06-15 04:43:05'),(345,345,'Active','Customer Update Complete','2020-06-15 04:43:05'),(345,345,'Active','Customer Update Complete','2020-06-15 04:43:05'),(345,345,'Removed','Customer Removed Successfully','2020-06-15 04:43:05');
 /*!40000 ALTER TABLE `CustomerStatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-14 13:10:36
+-- Dump completed on 2020-06-15  4:48:08
