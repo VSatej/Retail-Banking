@@ -13,7 +13,13 @@
 -->
 <div class="panel panel-default" style="border: 0px;width:60%;background:white;margin:auto;padding-top:2%">
         <div class="panel-body" style="border: 0px">
-            <form class="form-horizontal" style="padding: auto" name="data_fetch">
+        {% if error %}
+            <center><p class=error><strong>Error:</strong> {{ error }}<center>
+        {% endif %}
+        {% if message %}
+            <center><p class=error><strong>Messaage:</strong> {{ message }}<center>
+        {% endif %}
+            <form class="form-horizontal" style="padding: auto" name="data_fetch" method="POST">
                 <br>
                  <div class="form-group required">
                     <label class="control-label col-md-3" style="text-align: right;">Customer SSN ID : </label>
@@ -50,10 +56,11 @@
         User has to edit atleast one of the fields
         If user has not edited atleast one field proper message should be displayed
     -->
+    {% if type %}
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Delete Account</b></div>
         <div class="panel-body">
-            <form class="form-horizontal" style="padding: auto">
+            <form class="form-horizontal" style="padding: auto" method="POST">
                 <br>
                 <div class="form-group">
                     <label class="control-label col-md-4" style="text-align: left;">Account ID </label>
@@ -62,8 +69,7 @@
                         Account IDs of current customer should be displayed
                         -->
                         <select class="form-control" name="account_list">
-						  <option>Account ID 1</option>
-						  <option>Account ID 2</option>
+						  <option>{{ssn_id}}</option>
 						</select>
                     </div>
                  </div>
@@ -74,7 +80,7 @@
                         should come from database 
                         Eg: Current /Savings
                         -->
-                        <input type="text" name="account_type" class="form-control"style=" box-sizing: border-box;" value="Current" readonly>
+                        <input type="text" name="account_type" class="form-control"style=" box-sizing: border-box;" value={{type}} readonly>
                     </div>
                 </div>
                 <br>
@@ -87,5 +93,6 @@
         </div>
     </div>
     <br>
+    {% endif %}
 {% include "footer.html" %}
 {% endblock %}

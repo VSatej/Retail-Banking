@@ -84,16 +84,16 @@ class DBHandler:
 
 
     # AccountStatus Table:
-    # +--------------+-------------+------+-----+---------+-------+
-    # | Field        | Type        | Null | Key | Default | Extra |
-    # +--------------+-------------+------+-----+---------+-------+
-    # | Customer_ID  | int         | NO   |     | NULL    |       |
-    # | Account_ID   | int         | NO   |     | NULL    |       |
-    # | Account_Type | varchar(20) | NO   |     | NULL    |       |
-    # | Status       | varchar(20) | NO   |     | NULL    |       |
-    # | Message      | varchar(20) | NO   |     | NULL    |       |
-    # | Last_Updated | varchar(20) | NO   |     | NULL    |       |
-    # +--------------+-------------+------+-----+---------+-------+
+    # +--------------+--------------+------+-----+-------------------+-------------------+
+    # | Field        | Type         | Null | Key | Default           | Extra             |
+    # +--------------+--------------+------+-----+-------------------+-------------------+
+    # | Customer_ID  | int          | NO   |     | NULL              |                   |
+    # | Account_ID   | int          | NO   |     | NULL              |                   |
+    # | Account_Type | varchar(20)  | NO   |     | NULL              |                   |
+    # | Status       | varchar(20)  | NO   |     | NULL              |                   |
+    # | Message      | varchar(100) | NO   |     | NULL              |                   |
+    # | Last_Updated | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+    # +--------------+--------------+------+-----+-------------------+-------------------+
 
 
     def add_account_status(self, Customer_ID, Account_ID, Account_Type, Status, Message):
@@ -284,6 +284,21 @@ class DBHandler:
         result = mycursor.fetchall()
         
         return result
+
+    
+    def remove_account(self, Account_ID):
+        mycursor = self.db.cursor(self)
+
+        status = "Removed"
+        message = "Account Removed Successfully"
+        Customer_ID = self.get_account(Account_ID)[0][0]
+        typ = self.get_account(Account_ID)[0][6]
+        self.add_account_status(Customer_ID,Account_ID,typ,status,message)
+
+        mycursor.execute("DELETE from Account WHERE Account_ID={}".format(Account_ID))
+        self.db.commit()
+
+        print(mycursor.rowcount, "record(s) deleted")
 
     
 

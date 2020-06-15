@@ -37,7 +37,7 @@ def login():
             render_template('admin.html')
     return render_template('login.html', error=error)
 
-    
+
 
 @app.route("/createAccount",methods=['POST','GET'])
 def createAccount():
@@ -57,6 +57,7 @@ def createAccount():
                 return render_template("createAccount.html", error=error)
             else:
                 if len(db.get_account(customer_id)) == 0:
+                    print(db.get_account(customer_id))
                     if account_type == "Savings":
                         db.add_Account(customer_id,customer_id,"S",deposit)
                     else:
@@ -75,11 +76,50 @@ def createAccount():
 @app.route("/deleteAccount",methods=['POST','GET'])
 def deleteAccount():
     if request.method == 'POST':
-        account_id = request.form['']
-        account_type = request.form['']
-        #Bank.deleteAccount()
-        return redirect(request.url)
+        error = None
+        di = request.form.to_dict()
+        if "delete_ssn_id" in di.keys():
+            SSN_ID = request.form["delete_ssn_id"]
+            Customer_ID = request.form["delete_acc_id"]
+            if not SSN_ID and not Customer_ID:
+                error = "Enter either Customer ID or SSN ID to fetch acount"
+                return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+            elif SSN_ID:
+                db = DBHandler()
+                customer = db.get_account(SSN_ID)
+                print(customer)
+                if len(customer) == 0:
+                    error = "Invalid SSN ID/Account doesn't exit"
+                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                else:
+                    print(customer[0][6])
+                    if customer[0][6] == "S":
+                        acc_type = "Savings"
+                    else:
+                        acc_type = "Current"
+                    return render_template("deleteAccount.html",ssn_id=customer[0][1],cust_id="",name="",address="",age="", type=acc_type)
+            elif Customer_ID:
+                db = DBHandler()
+                customer = db.get_account(Customer_ID)
+                if len(customer) == 0:
+                    error = "Invalid customer ID/Account doesn't exist"
+                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                else:
+                    if customer[0][6] == "S":
+                        acc_type = "Savings"
+                    else:
+                        acc_type = "Current"
+                    return render_template("deleteAccount.html",ssn_id=customer[0][1],cust_id="",name="",address="",age="", type=acc_type)
+
+        if "account_list" in di.keys():
+            db = DBHandler()
+            customer = db.get_account(di["account_list"])
+            db.remove_account(di["account_list"])
+            message = "Account Removed Successfully!"
+            return render_template("deleteAccount.html",ssn_id=customer[0][1],cust_id="",name="",address="",age="", message=message)
     return render_template("deleteAccount.html")
+
+
 
 @app.route("/updateCustomer",methods=['POST','GET'])
 def updateCustomer():
@@ -126,13 +166,38 @@ def updateCustomer():
 @app.route("/deleteCustomer",methods=['POST','GET'])
 def deleteCustomer():
     if request.method == 'POST':
-        ssn_id = request.form['']
-        cust_id = request.form['']
-        name = request.form['']
-        age = request.form['']
-        address = request.form['']
-        #Bank.deleteCustomer(ssn_id,cust_id,name,age,address)
-        return redirect(request.url) 
+        error = None
+        di = request.form.to_dict()
+        if "delete_ssn_id" in di.keys():
+            SSN_ID = request.form["delete_ssn_id"]
+            Customer_ID = request.form["delete_acc_id"]
+            if not SSN_ID and not Customer_ID:
+                error = "Enter either Customer ID or SSN ID to fetch acount"
+                return render_template("deleteCustomer.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+            elif SSN_ID:
+                db = DBHandler()
+                customer = db.get_customer_from_SSN_ID(SSN_ID)
+                print(customer)
+                if len(customer) == 0:
+                    error = "Invalid SSN ID"
+                    return render_template("deleteCustomer.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                else:
+                    return render_template("deleteCustomer.html",ssn_id=SSN_ID,cust_id=customer[0][1],name=customer[0][2],address=customer[0][3],age=customer[0][4])
+            elif Customer_ID:
+                db = DBHandler()
+                customer = db.get_customer_from_Customer_ID(Customer_ID)
+                if len(customer) == 0:
+                    error = "Invalid Customer ID"
+                    return render_template("deleteCustomer.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                else:
+                    return render_template("deleteCustomer.html",ssn_id=customer[0][0],cust_id=customer[0][1],name=customer[0][2],address=customer[0][3],age=customer[0][4])
+
+        elif "cust_id" in di.keys():
+            cust_id = request.form['cust_id']
+            db = DBHandler()
+            db.remove_customer(cust_id)
+            message="Customer Deleted Successfully!"
+            return render_template("deleteCustomer.html",message=message)
     return render_template("deleteCustomer.html")
 """
 @app.route("/deleteAccount",methods=['POST','GET'])
