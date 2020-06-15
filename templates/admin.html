@@ -4,6 +4,9 @@
 {% block body %}
     <h1>Welcome Admin</h1>
     <a href="{{ url_for('register') }}">Create</a>
-    <a href="{{ url_for('delete') }}">Delete</a>
-    <a href="{{ url_for('update') }}">Update</a>
+    <a href="{{ url_for('deleteAccount') }}">Delete Account</a>
+    <a href="{{ url_for('updateAccount') }}">Update Account</a>
+    <a href="{{ url_for('updateCustomer') }}">Update Customer</a>
+    <a href="{{ url_for('accountSearch') }}">Account Search</a>
+    <a href="{{ url_for('customerSearch') }}">Customer Search</a>
 {% endblock %}

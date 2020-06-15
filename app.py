@@ -64,7 +64,7 @@ def updateCustomer():
         #Bank.createAccount(new_name.new_age,new_address)
         return redirect(request.url)
     #Bank.accountDetails()
-    return render_template("updateCustomer.html",ssn_id,cust_id,name,address,age)
+    return render_template("updateCustomer.html",ssn_id="",cust_id="",name="",address="",age="")
 
 @app.route("/deleteCustomer",methods=['POST','GET'])
 def deleteCustomer():
@@ -77,18 +77,18 @@ def deleteCustomer():
         #Bank.deleteCustomer(ssn_id,cust_id,name,age,address)
         return redirect(request.url) 
     return render_template("deleteCustomer.html")
-
+"""
 @app.route("/deleteAccount",methods=['POST','GET'])
-def deleteCustomer():
+def deleteAccount():
     if request.method == 'POST':
         account_id = request.form['']
         account_type = request.form['']
         #Bank.deleteAccount(account_id,account_type)
         return redirect(request.url) 
     return render_template("deleteAccount.html")
-
+"""
 @app.route("/accountSearch",methods=['POST','GET'])
-def search():
+def accountSearch():
     if request.method == 'POST':
         account_id = request.form['']
         customer_id = request.form['']
@@ -97,7 +97,7 @@ def search():
     return render_template("accountSearch.html")
 
 @app.route("/customerSearch",methods=['POST','GET'])
-def search():
+def customerSearch():
     if request.method == 'POST':
         ssn_id = request.form['']
         customer_id = request.form['']

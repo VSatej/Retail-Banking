@@ -4,6 +4,6 @@
 {% block body %}
     <h1>Welcome {{ name }}</h1>
     <a href="{{ url_for('status') }}">Status</a>
-    <a href="{{ url_for('deposit') }}">Deposit</a>
-    <a href="{{ url_for('withdraw') }}">Withdraw</a>
+    <a href="{{ url_for('cashier_deposit') }}">Deposit</a>
+    <a href="{{ url_for('cashier_withdraw') }}">Withdraw</a>
 {% endblock %}
