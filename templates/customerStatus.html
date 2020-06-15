@@ -9,39 +9,34 @@
 {% block body %}
 {% include "header.html" %}
 <div style="flex-grow: 1">
-<div class="panel panel-default" style="border: 0px;width:70%;background:white;margin:auto;">
+    <div class="panel panel-default" style="border: 0px;width:70%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px;padding-top: 3%"><b>Customer Status</b></div>
-        <div class="panel-body">        
-  <table class="table table-bordered">
-  	<strong>
-    <thead class="thead-dark">
-      <tr>
-        <th>Customer ID</th>
-        <th>Customer SSN ID</th>
-        <th>Status</th>
-        <th>Message</th>
-        <th>Last Updated</th>
-        <th>Operations</th>
-        <th>View Profile</th>
-      </tr>
-    </thead>
-</strong>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>John</td>
-        <td>Doe</td>
-        <td><a href="{{ url_for('customerStatus') }}"><u><b>Refresh</b></u></a></td>
-        <td><a href="#"><u><b>View Details</b></u></a></td>
-      </tr>
-    </tbody>
-  </table>
-
-</body>
-</html>
-
+            <div class="panel-body">        
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Customer SSN ID</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                    <th>Last Updated</th>
+                    <th>Operations</th>
+                    <th>View Profile</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td><a href="{{ url_for('customerStatus') }}"><u><b>Refresh</b></u></a></td>
+                    <td><a href="#"><u><b>View Details</b></u></a></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
         </div>
     </div>
 </div>

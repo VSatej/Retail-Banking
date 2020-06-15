@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Account Status{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header.html" %}
+<div style="flex-grow: 1">
+    <div class="panel panel-default" style="border: 0px;width:70%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px;padding-top: 3%"><b>Account Status</b></div>
+            <div class="panel-body">        
+                <table class="table table-bordered">
+  	            <strong>
+                <thead class="thead-dark">
+                <tr>
+                <th>Customer ID</th>
+                <th>Account ID</th>
+                <th>Account Type</th>
+                <th>Account Status</th>
+                <th>Message</th>
+                <th>Last Updated</th>
+                <th>Operations</th>
+                </tr>
+                </thead>
+                </strong>
+                <tbody>
+                <tr>
+                    <td>1000</td>
+                    <td>1000</td>
+                    <td>Savings</td>
+                    <td>status</td>
+                    <td>msg</td>
+                    <td>date</td>
+                    <td><a href="{{ url_for('accountStatus') }}"><u><b>Refresh</b></u></a></td>
+                </tr>
+                </tbody>
+                </table>
+                <br>
+                <form name="acc_status_form" class="form-horizontal" style="padding: auto", method=POST>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px"><b>Refresh the list</b></button></center>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>  
+{% include "footer.html" %}
+{% endblock %}
+
+

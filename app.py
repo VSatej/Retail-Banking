@@ -246,6 +246,10 @@ def createCustomer():
 def customerStatus():
     return render_template("customerStatus.html")
 
+@app.route("/accountStatus",methods=['POST','GET'])
+def accountStatus():
+    return render_template("accountStatus.html")
+
 @app.route("/cashier_withdraw",methods=['POST','GET'])
 def cashier_withdraw():
     if request.method == 'POST':
