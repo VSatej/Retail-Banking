@@ -8,7 +8,6 @@
 {% endblock %}
 {% block body %}
 {% include "header.html" %}
-<br>
 <!--
     here error msg should be displayed if customer not found
 -->
@@ -22,7 +21,7 @@
                         <!-- 
                         User will enter this value
                         -->
-                        <input type="number" minlength="9" style="text-align: left;"  maxlength="9" class="form-control"style=" box-sizing: border-box" value="Current" name="update_ssn_id">
+                        <input type="number" minlength="9" style="text-align: left;"  maxlength="9" class="form-control"style=" box-sizing: border-box" value="Current" name="delete_ssn_id">
                     </div>
                     <label class="control-label- col-md-1" style="text-align: center;padding: 1%;text-align: center">OR</label>
                     <label class="control-label col-md-2">Customer ID : </label>
@@ -30,13 +29,13 @@
                         <!-- 
                             User will enter this value
                         -->
-                        <input type="number" minlength="9" maxlength="9" class="form-control"style=" box-sizing: border-box;" value="Current" name="update_acc_id">
+                        <input type="number" minlength="9" maxlength="9" class="form-control"style=" box-sizing: border-box;" value="Current" name="delete_acc_id">
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-8">
-                    <center><button type="submit" name="data_fetch_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
+                    <center><button type="submit" name="sub_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
                     </div>
                 </div>
             </form>
@@ -47,7 +46,10 @@
     If record exists then below html code will be displayed
 
     -->
-    
+    <!--
+        User has to edit atleast one of the fields
+        If user has not edited atleast one field proper message should be displayed
+    -->
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Delete Account</b></div>
         <div class="panel-body">
@@ -59,7 +61,7 @@
                         <!-- This data should come from database 
                         Account IDs of current customer should be displayed
                         -->
-                        <select class="form-control">
+                        <select class="form-control" name="account_list">
 						  <option>Account ID 1</option>
 						  <option>Account ID 2</option>
 						</select>
@@ -72,7 +74,7 @@
                         should come from database 
                         Eg: Current /Savings
                         -->
-                        <input type="text" class="form-control"style=" box-sizing: border-box;" value="Current" readonly>
+                        <input type="text" name="account_type" class="form-control"style=" box-sizing: border-box;" value="Current" readonly>
                     </div>
                 </div>
                 <br>
