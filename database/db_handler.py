@@ -96,11 +96,11 @@ class DBHandler:
     # +--------------+-------------+------+-----+---------+-------+
 
 
-    def add_account_status(self, Customer_ID, Account_ID, Account_Type, Status, Message, Last_Updated):
+    def add_account_status(self, Customer_ID, Account_ID, Account_Type, Status, Message):
         mycursor = self.db.cursor()
 
-        sql = "INSERT INTO AccountStatus(Customer_ID, Account_ID, Account_Type, Status, Message, Last_Updated) VALUES (%s, %s, %s, %s, %s, %s)"
-        val = (Customer_ID, Account_ID, Account_Type, Status, Message, Last_Updated)
+        sql = "INSERT INTO AccountStatus(Customer_ID, Account_ID, Account_Type, Status, Message) VALUES (%s, %s, %s, %s, %s)"
+        val = (Customer_ID, Account_ID, Account_Type, Status, Message)
         mycursor.execute(sql, val)
 
         self.db.commit()
@@ -247,6 +247,43 @@ class DBHandler:
 
         print(mycursor.rowcount, "record(s) affected")
 
+
+    # Account Table:
+    # +--------------+------------+------+-----+-------------------+-------------------+
+    # | Field        | Type       | Null | Key | Default           | Extra             |
+    # +--------------+------------+------+-----+-------------------+-------------------+
+    # | Customer_ID  | int        | NO   | UNI | NULL              |                   |
+    # | Account_ID   | int        | NO   | PRI | NULL              |                   |
+    # | Balance      | int        | NO   |     | NULL              |                   |
+    # | CR_Data      | datetime   | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+    # | CR_LDate     | datetime   | YES  |     | NULL              |                   |
+    # | Duration     | int        | NO   |     | 10                |                   |
+    # | Account_Type | varchar(1) | NO   |     | NULL              |                   |
+    # +--------------+------------+------+-----+-------------------+-------------------+
+
+    def add_Account(self, Customer_ID, Account_ID, Account_Type, Balance):
+        mycursor = self.db.cursor()
+
+        sql = "INSERT INTO Account(Customer_ID, Account_ID, Balance, Account_Type, CR_LDate) VALUES (%s, %s, %s, %s, DATE_ADD(CURDATE(),INTERVAL 10 YEAR))"
+        val = (Customer_ID, Account_ID, Balance, Account_Type)
+        mycursor.execute(sql, val)
+
+        self.db.commit()
+
+        status = "Active"
+        message = "Account Created Successfully"
+        self.add_account_status(Customer_ID, Account_ID, Account_Type,status, message)
+
+        print(mycursor.rowcount, "record inserted.")
+
+    
+    def get_account(self, Account_ID):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT * FROM Account WHERE Account_ID={}".format(Account_ID))
+        result = mycursor.fetchall()
+        
+        return result
 
     
 

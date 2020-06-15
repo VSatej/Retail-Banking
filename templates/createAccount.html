@@ -11,8 +11,14 @@
 <br>
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Create Account</b></div>
+        {% if error %}
+            <center><p class=error><strong>Error:</strong> {{ error }}<center>
+        {% endif %}
+        {% if message %}
+            <center><p class=error><strong>Message:</strong> {{ message }}<center>
+        {% endif %}
         <div class="panel-body">
-            <form class="form-horizontal" style="padding: auto">
+            <form class="form-horizontal" style="padding: auto", method=POST>
                 <br>
                 <div class="form-group required">
                     <label class="control-label col-md-5" style="text-align: left;">Customer ID: </label>
@@ -25,7 +31,7 @@
                 <div class="form-group required">
                     <label class="control-label col-md-5" style="text-align: left;">Account Type: </label>
                     <div class="col-md-6">
-                        <select class="form-control">
+                        <select class="form-control" name="acc_type">
 						  <option>Savings</option>
 						  <option>Current</option>
 						</select>
@@ -34,7 +40,7 @@
                  <div class="form-group required">
                     <label class="control-label col-md-5" style="text-align: left;">Deposit Amount:</label>
                     <div class="col-md-6">
-                        <input type="number" class="form-control" name="customer_ssn_id" style=" box-sizing: border-box;" required >
+                        <input type="number" class="form-control" name="amount" style=" box-sizing: border-box;" required >
                     </div>
                 </div>
                 <div class="form-group">

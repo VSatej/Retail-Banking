@@ -37,14 +37,40 @@ def login():
             render_template('admin.html')
     return render_template('login.html', error=error)
 
+    
+
 @app.route("/createAccount",methods=['POST','GET'])
 def createAccount():
     if request.method == 'POST':
-        customer_id = request.form['']
-        account_type = request.form['']
-        deposit = request.form['']
+        error = None
+        customer_id = request.form['customer_ssn_id']
+        account_type = request.form['acc_type']
+        deposit = request.form['amount']
+        if len(str(customer_id)) != 9:
+            error = "Customer ID Incorrect"
+            return render_template("createAccount.html", error=error)
+        else:
+            db = DBHandler()
+            customer = db.get_customer_from_Customer_ID(customer_id)
+            if len(customer) == 0:
+                error = "Customer ID Incorrect"
+                return render_template("createAccount.html", error=error)
+            else:
+                if len(db.get_account(customer_id)) == 0:
+                    if account_type == "Savings":
+                        db.add_Account(customer_id,customer_id,"S",deposit)
+                    else:
+                        db.add_Account(customer_id,customer_id,"C",deposit)
+                    message = "Account Added Successfully"
+                    return render_template("createAccount.html", message=message)
+                else:
+                    error = "Account Already Exists!"
+                    return render_template("createAccount.html", error=error)
+
         #Bank.createAccount()
     return render_template("createAccount.html")
+
+
 
 @app.route("/deleteAccount",methods=['POST','GET'])
 def deleteAccount():
