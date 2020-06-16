@@ -244,11 +244,15 @@ def createCustomer():
 
 @app.route("/customerStatus",methods=['POST','GET'])
 def customerStatus():
-    return render_template("customerStatus.html")
+    db = DBHandler()
+    status = db.get_all_customer_status()
+    return render_template("customerStatus.html", data=status)
 
 @app.route("/accountStatus",methods=['POST','GET'])
 def accountStatus():
-    return render_template("accountStatus.html")
+    db = DBHandler()
+    status = db.get_all_account_status()
+    return render_template("accountStatus.html",data=status)
 
 @app.route("/cashier_withdraw",methods=['POST','GET'])
 def cashier_withdraw():
