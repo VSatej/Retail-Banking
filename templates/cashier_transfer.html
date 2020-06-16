@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Transfer Page{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header_cashier.html" %}
+<br>
+<div style="flex-grow: 1">
+    <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Transfer Money</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="transfer_form" style="padding: auto" method="POST" action="">
+                <div class="form-group">
+                    <label class="control-label col-md-5 " style="text-align: left;">Customer ID </label>
+                    <!--
+                        Customer ID
+                        This value should come from database
+                    -->
+                    <div class="col-md-7">
+                        <input type="number" class="form-control" value="1000" name="cust_ssn_id" style=" box-sizing: border-box;" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5 " style="text-align: left;">Source Account Type </label>
+                    <!--
+                        Source Account Type
+                        This value should come from database
+                    -->
+                    <div class="col-md-7">
+                        <select class="form-control" name="source_account_list">
+                          <option>Savings-123456789</option>
+                          <option>Savings-123456789</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5 " style="text-align: left;">Target Account Type </label>
+                    <!--
+                        Source Account Type
+                        This value should come from database
+                    -->
+                    <div class="col-md-7">
+                        <select class="form-control" name="target_account_list">
+                          <option>Savings-123456789</option>
+                          <option>Savings-123456789</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5 " style="text-align: left;">Transfer Amount </label>
+                    <!--
+                        Source Account Type
+                        This value should come from database
+                    -->
+                    <div class="col-md-7">
+                        <input type="number" class="form-control" name="transfer_amount" style=" box-sizing: border-box;" required >
+                    </div>
+                </div>
+                
+                <br>
+                <div class="form-group">
+                    <div class="col-md-6">
+                    <center><a href="{{ url_for('accountDetails') }}" name="cancel" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Cancel</a></center>
+                    </div>
+                    <div class="col-md-6">
+                    <center><button type="submit" name="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Transfer</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- if money transfer successful then display this code-->
+
+    <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Transfer Details</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="transfer_form" style="padding: auto" method="POST" action="">
+                <div class="form-group">
+                    <label class="control-label col-md-7 " style="text-align: left;">Source Account ID </label>
+                    <!--
+                        Customer ID
+                        This value should come from database
+                    -->
+                    <div class="col-md-5">
+                        <label class="control-label" name="src_id" style="text-align: left;padding-left:5%">1000</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-7 " style="text-align: left;">Target Account ID </label>
+                    <!--
+                        Customer ID
+                        This value should come from database
+                    -->
+                    <div class="col-md-5">
+                        <label class="control-label" name="tgt_id" style="text-align: left;padding-left:5%">2000</label>
+                    </div>
+                </div>
+                <!-- display account ID in this label-->
+                <div class="form-group">
+                <label class="control-label col-md-7 " style="text-align: left;">Balance before transfer for Account ID 1 </label>
+                    <!--
+                        Customer ID
+                        This value should come from database
+                    -->
+                    <div class="col-md-5">
+                        <label class="control-label" name="src_old_bal" style="text-align: left;padding-left:5%">1000</label>
+                    </div>
+                </div>
+                <!-- display account ID in this label-->
+                <div class="form-group">
+                    <label class="control-label col-md-7 " style="text-align: left;">Balance before transfer for Account ID 2</label>
+                    <!--
+                        Customer ID
+                        This value should come from database
+                    -->
+                    <div class="col-md-5">
+                        <label class="control-label" name="tgt_old_bal" style="text-align: left;padding-left:5%">2000</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-12 " style="text-align: center;font-size: 18px">Amount transfer completed successfully!!</label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 
+        If insufficient balance then display this    
+    -->
+    <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-body">
+            <label class="control-label col-md-12 " style="text-align: center;font-size: 18px">Transfer not allowed, please choose smaller amount.</label>
+        </div>
+    </div>
+
+    <br>
+    <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-md-12">
+                <center><a href="{{ url_for('accountDetails') }}" name="back" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Back</a></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

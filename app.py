@@ -232,17 +232,6 @@ def customerSearch():
         return redirect(request.url) 
     return render_template("customerSearch.html")
 
-@app.route("/cashier_deposit",methods=['POST','GET'])
-def cashier_deposit():
-    if request.method == 'POST':
-        cust_id = request.form['']
-        account_id = request.form['']
-        account_type = request.form['']
-        balance = request.form['']
-        #Bank.deposit()
-        return redirect(request.url) 
-    return render_template("cashier_deposit.html")
-
 @app.route("/createCustomer",methods=['POST','GET'])
 def createCustomer():
     if request.method == "POST":
@@ -290,6 +279,32 @@ def cashier_withdraw():
         #Bank.withdraw()
         return redirect(request.url) 
     return render_template("cashier_withdraw.html")
+
+@app.route("/accountDetails",methods=['POST','GET'])
+def accountDetails(): 
+    return render_template("accountDetails.html")
+
+@app.route("/cashier_deposit",methods=['POST','GET'])
+def cashier_deposit():
+    if request.method == 'POST':
+        cust_id = request.form['']
+        account_id = request.form['']
+        account_type = request.form['']
+        balance = request.form['']
+        #Bank.withdraw()
+        return redirect(request.url) 
+    return render_template("cashier_deposit.html")
+
+@app.route("/cashier_transfer",methods=['POST','GET'])
+def cashier_transfer():
+    if request.method == 'POST':
+        cust_id = request.form['']
+        account_id = request.form['']
+        account_type = request.form['']
+        balance = request.form['']
+        #Bank.withdraw()
+        return redirect(request.url) 
+    return render_template("cashier_transfer.html")
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

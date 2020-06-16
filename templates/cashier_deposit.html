@@ -13,14 +13,14 @@
 <div class="panel panel-default" style="border: 0px;width:28%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Deposit Money</b></div>
         <div class="panel-body">
-            <form class="form-horizontal" style="padding: auto" method="POST" action="">
+            <form class="form-horizontal" name="deposit_form" style="padding: auto" method="POST" action="">
                 <div class="form-group">
                     <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Customer ID </label>
                     <div class="col-md-6">
                             <!-- 
                                 This label should display the Customer ID
                             -->
-                        <label class="control-label" style="text-align: left;padding-left:5%">80000</label>
+                        <label class="control-label" name="cust_id" style="text-align: left;padding-left:5%">80000</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -29,7 +29,7 @@
                             <!-- 
                                 This label should display the Account ID
                             -->
-                        <label class="control-label" style="text-align: left;padding-left:5%">1000</label>
+                        <label class="control-label" name="acc_id" style="text-align: left;padding-left:5%">1000</label>
                     
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             <!-- 
                                 This label should display the Account Type
                             -->
-                        <label class="control-label" style="text-align: left;padding-left:5%">Savings</label>
+                        <label class="control-label" name="acc_type" style="text-align: left;padding-left:5%">Savings</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -48,7 +48,7 @@
                             <!-- 
                                 This label should display the account balance
                             -->
-                        <label class="control-label" style="text-align: left;padding-left:5%">10000</label>
+                        <label class="control-label" name="acc_bal" style="text-align: left;padding-left:5%">10000</label>
                     </div>
                 </div>
                 <div class="form-group ">
@@ -59,14 +59,35 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-8">
-                    <center><button type="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
+                    <div class="col-md-6">
+                    <center><a href="{{ url_for('accountDetails') }}" name="cancel" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Cancel</a></center>
+                    </div>
+                    <div class="col-md-6">
+                    <center><button type="submit" name="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <br>
-    </div>
+<!--
+    If deposit successful display this
+-->
+<div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-body">
+            <label class="control-label col-md-12 " style="text-align: center;font-size: 18px">Amount deposited successfully</label>
+        </div>
+</div>
+<br>
+<div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-md-12">
+                <center><a href="{{ url_for('accountDetails') }}" name="back" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Back</a></center>
+                </div>
+            </div>
+        </div>
+</div>
+  
+</div>
 {% include "footer.html" %}
 {% endblock %}
