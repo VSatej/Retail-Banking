@@ -252,7 +252,7 @@ class DBHandler:
     # +--------------+------------+------+-----+-------------------+-------------------+
     # | Field        | Type       | Null | Key | Default           | Extra             |
     # +--------------+------------+------+-----+-------------------+-------------------+
-    # | Customer_ID  | int        | NO   | UNI | NULL              |                   |
+    # | Customer_ID  | int        | NO   |     | NULL              |                   |
     # | Account_ID   | int        | NO   | PRI | NULL              |                   |
     # | Balance      | int        | NO   |     | NULL              |                   |
     # | CR_Data      | datetime   | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |

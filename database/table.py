@@ -18,7 +18,7 @@
     );
 
     CREATE TABLE Account(
-        Customer_ID INT NOT NULL UNIQUE,
+        Customer_ID INT NOT NULL,
         Account_ID INT NOT NULL PRIMARY KEY,
         Balance INT NOT NULL,
         CR_Data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
