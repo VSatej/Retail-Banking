@@ -245,6 +245,27 @@ def cashier_deposit():
 
 @app.route("/createCustomer",methods=['POST','GET'])
 def createCustomer():
+    if request.method == "POST":
+        ssn_id = request.form["cust_ssn_id"]
+        name = request.form['cust_name']
+        age = request.form['cust_age']
+        address = request.form['cust_address']
+        state = request.form["stt"]
+        city = request.form["city"]
+
+        address = address + ", " + city + ", " + state
+
+        db = DBHandler()
+        if len(str(ssn_id)) != 9:
+            error="Invalid SSN ID"
+            return render_template("createCustomer.html",error=error)
+        elif len(db.get_customer_from_SSN_ID(ssn_id)) != 0:
+            error="Customer Already Exists"
+            return render_template("createCustomer.html",error=error)
+        else:
+            db.add_customer(ssn_id, ssn_id, name, address, age)
+            message="Customer Added Successfully"
+            return render_template("createCustomer.html",message=message)
     return render_template("createCustomer.html")
 
 @app.route("/customerStatus",methods=['POST','GET'])

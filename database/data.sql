@@ -30,8 +30,7 @@ CREATE TABLE `Account` (
   `CR_LDate` datetime DEFAULT NULL,
   `Duration` int NOT NULL DEFAULT '10',
   `Account_Type` varchar(1) NOT NULL,
-  PRIMARY KEY (`Account_ID`),
-  UNIQUE KEY `Customer_ID` (`Customer_ID`)
+  PRIMARY KEY (`Account_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,6 +40,7 @@ CREATE TABLE `Account` (
 
 LOCK TABLES `Account` WRITE;
 /*!40000 ALTER TABLE `Account` DISABLE KEYS */;
+INSERT INTO `Account` VALUES (123456789,123456789,10000,'2020-06-16 08:36:29','2030-06-16 00:00:00',10,'C'),(123456789,123458847,4500,'2020-06-16 09:46:20','2030-06-16 00:00:00',10,'S');
 /*!40000 ALTER TABLE `Account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `AccountStatus` (
 
 LOCK TABLES `AccountStatus` WRITE;
 /*!40000 ALTER TABLE `AccountStatus` DISABLE KEYS */;
-INSERT INTO `AccountStatus` VALUES (123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:22:53'),(123456789,123456789,'S','Active','Account Created Successfully','2020-06-15 14:24:27'),(123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:25:44');
+INSERT INTO `AccountStatus` VALUES (123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:22:53'),(123456789,123456789,'S','Active','Account Created Successfully','2020-06-15 14:24:27'),(123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:25:44'),(123456789,123456789,'C','Active','Account Created Successfully','2020-06-16 08:36:29'),(123456789,123459925,'S','Active','Account Created Successfully','2020-06-16 09:03:08'),(123456789,123459925,'S','Removed','Account Removed Successfully','2020-06-16 09:45:51'),(123456789,123458847,'S','Active','Account Created Successfully','2020-06-16 09:46:20');
 /*!40000 ALTER TABLE `AccountStatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +95,7 @@ CREATE TABLE `Customer` (
 
 LOCK TABLES `Customer` WRITE;
 /*!40000 ALTER TABLE `Customer` DISABLE KEYS */;
-INSERT INTO `Customer` VALUES (123,123,'Rohan Hirekerur','Pune',21),(123456789,123456789,'Viren','Pune',21);
+INSERT INTO `Customer` VALUES (123123123,123123123,'Rohan','Bibwewadi,  Pune , Maharashtra',21);
 /*!40000 ALTER TABLE `Customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `CustomerStatus` (
 
 LOCK TABLES `CustomerStatus` WRITE;
 /*!40000 ALTER TABLE `CustomerStatus` DISABLE KEYS */;
-INSERT INTO `CustomerStatus` VALUES (123,123,'Active','Customer Update Complete','2020-06-15 04:27:34'),(345,345,'Active','Customer Created Successfully','2020-06-15 04:37:07'),(345,345,'Active','Customer Update Complete','2020-06-15 04:42:01'),(345,345,'Active','Customer Update Complete','2020-06-15 04:42:01'),(345,345,'Active','Customer Created Successfully','2020-06-15 04:43:05'),(345,345,'Active','Customer Update Complete','2020-06-15 04:43:05'),(345,345,'Active','Customer Update Complete','2020-06-15 04:43:05'),(345,345,'Removed','Customer Removed Successfully','2020-06-15 04:43:05'),(345,345,'Active','Customer Created Successfully','2020-06-15 06:58:57'),(345,345,'Active','Customer Update Complete','2020-06-15 06:58:57'),(345,345,'Active','Customer Update Complete','2020-06-15 06:58:57'),(345,345,'Removed','Customer Removed Successfully','2020-06-15 06:58:57'),(345,345,'Active','Customer Created Successfully','2020-06-15 07:21:41'),(345,345,'Active','Customer Update Complete','2020-06-15 07:21:41'),(345,345,'Active','Customer Update Complete','2020-06-15 07:21:41'),(345,345,'Removed','Customer Removed Successfully','2020-06-15 07:21:41'),(123,123,'Active','Customer Update Complete','2020-06-15 10:15:35'),(123,123,'Active','Customer Update Complete','2020-06-15 10:19:29'),(123,123,'Active','Customer Update Complete','2020-06-15 10:22:15'),(123,123,'Active','Customer Update Complete','2020-06-15 10:23:58'),(123456789,123456789,'Removed','Customer Removed Successfully','2020-06-15 13:38:36');
+INSERT INTO `CustomerStatus` VALUES (123123123,123123123,'Active','Customer Created Successfully','2020-06-16 11:00:11');
 /*!40000 ALTER TABLE `CustomerStatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-15 14:28:22
+-- Dump completed on 2020-06-16 11:07:04

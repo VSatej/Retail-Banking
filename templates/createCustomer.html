@@ -13,6 +13,12 @@
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Create Customer Screen</b></div>
         <div class="panel-body">
+        {% if error %}
+            <center><p class=error><strong>Error:</strong> {{ error }}</center>
+        {% endif %}
+        {% if message %}
+            <center><p class=error><strong>Message:</strong> {{ message }}</center>
+        {% endif %}
             <form class="form-horizontal" style="padding: auto" method="POST" action="" name="update_form">
                 <br>
                 <div class="form-group required">
@@ -42,14 +48,14 @@
                 <div class="form-group required">
                     <label class="control-label col-md-5 " style="text-align: left;">State</label>
                     <div class="col-md-7">
-                        <select class="form-control" id="sts" name ="stt" onchange="print_city('city', this.selectedIndex);">
+                        <select class="form-control" id="sts" name ="stt" onchange="print_city('city', this.selectedIndex);" required>
                         </select>
                     </div>
                 </div>
                 <div class="form-group required">
                     <label class="control-label col-md-5 " style="text-align: left;">City</label>
                     <div class="col-md-7">
-                        <select class="form-control" id="city">
+                        <select class="form-control" id="city" name="city" required>
                         </select>
                         <script language="javascript">print_state("sts");</script>
                     </div>

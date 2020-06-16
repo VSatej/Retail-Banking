@@ -21,12 +21,11 @@
                     <th>Message</th>
                     <th>Last Updated</th>
                     <th>Operations</th>
-                    <th>View Profile</th>
                 </tr>
                 </thead>
                 <tbody>
                     {% for each in data %}
-                         <tr><td>{{each[0]}}</td><td>{{each[1]}}</td><td>{{each[2]}}</td><td>{{each[3]}}</td><td>{{each[4]}}</td><td><a href='{{ url_for('customerStatus') }}'><u><b>Refresh</b></u></a></td><td><a href=''><u><b>View Details</b></u></a></td></tr>           
+                         <tr><td>{{each[0]}}</td><td>{{each[1]}}</td><td>{{each[2]}}</td><td>{{each[3]}}</td><td>{{each[4]}}</td><td><a href='{{ url_for('customerStatus') }}'><u><b>Refresh</b></u></a></td></tr>           
                     {% endfor %}
                 </tbody>
             </table>
