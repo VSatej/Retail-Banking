@@ -2,6 +2,7 @@ from flask import Flask,render_template,request,flash,redirect,url_for,session
 # from flask.ext.session import Session
 from database.db_handler import DBHandler
 #from Bank import Bank
+from numpy.random import randint
 
 app = Flask(__name__)
 
@@ -55,18 +56,17 @@ def createAccount():
             if len(customer) == 0:
                 error = "Customer ID Incorrect"
                 return render_template("createAccount.html", error=error)
-            else:
-                if len(db.get_account(customer_id)) == 0:
-                    print(db.get_account(customer_id))
-                    if account_type == "Savings":
-                        db.add_Account(customer_id,customer_id,"S",deposit)
-                    else:
-                        db.add_Account(customer_id,customer_id,"C",deposit)
-                    message = "Account Added Successfully"
-                    return render_template("createAccount.html", message=message)
+            else:            
+                print(db.get_account(customer_id))
+                if account_type == "Savings":
+                    account_id = int(int(customer_id)/10000)*10000 + randint(1000,9999)
+                    db.add_Account(customer_id,account_id,"S",deposit)
                 else:
-                    error = "Account Already Exists!"
-                    return render_template("createAccount.html", error=error)
+                    account_id = int(int(customer_id)/10000)*10000 + randint(1000,9999)
+                    db.add_Account(customer_id,account_id,"C",deposit)
+                message = "Account Added Successfully"
+                return render_template("createAccount.html", message=message)
+
 
         #Bank.createAccount()
     return render_template("createAccount.html")
@@ -83,33 +83,38 @@ def deleteAccount():
             Customer_ID = request.form["delete_acc_id"]
             if not SSN_ID and not Customer_ID:
                 error = "Enter either Customer ID or SSN ID to fetch acount"
-                return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error,accounts=[])
             elif SSN_ID:
                 db = DBHandler()
-                customer = db.get_account(SSN_ID)
+                customer = db.get_all_accounts(SSN_ID)
                 print(customer)
                 if len(customer) == 0:
                     error = "Invalid SSN ID/Account doesn't exit"
-                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error,accounts=[])
                 else:
-                    print(customer[0][6])
-                    if customer[0][6] == "S":
-                        acc_type = "Savings"
-                    else:
-                        acc_type = "Current"
-                    return render_template("deleteAccount.html",ssn_id=customer[0][1],cust_id="",name="",address="",age="", type=acc_type)
+                    accounts = []
+                    for account in customer:
+                        if account[6] == "S":
+                            acc_type = "Savings"
+                        else:
+                            acc_type = "Current"
+                        accounts.append([account[1],acc_type])
+                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error="",accounts=accounts)
             elif Customer_ID:
                 db = DBHandler()
-                customer = db.get_account(Customer_ID)
+                customer = db.get_all_accounts(Customer_ID)
                 if len(customer) == 0:
                     error = "Invalid customer ID/Account doesn't exist"
-                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error)
+                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error=error,accounts=[])
                 else:
-                    if customer[0][6] == "S":
-                        acc_type = "Savings"
-                    else:
-                        acc_type = "Current"
-                    return render_template("deleteAccount.html",ssn_id=customer[0][1],cust_id="",name="",address="",age="", type=acc_type)
+                    accounts = []
+                    for account in customer:
+                        if account[6] == "S":
+                            acc_type = "Savings"
+                        else:
+                            acc_type = "Current"
+                        accounts.append(account[1],acc_type)
+                    return render_template("deleteAccount.html",ssn_id="",cust_id="",name="",address="",age="", error="",accounts=accounts)
 
         if "account_list" in di.keys():
             db = DBHandler()

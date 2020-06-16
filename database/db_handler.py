@@ -286,6 +286,15 @@ class DBHandler:
         return result
 
     
+    def get_all_accounts(self, Customer_ID):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT * FROM Account WHERE Customer_ID={}".format(Customer_ID))
+        result = mycursor.fetchall()
+        
+        return result
+
+    
     def remove_account(self, Account_ID):
         mycursor = self.db.cursor(self)
 

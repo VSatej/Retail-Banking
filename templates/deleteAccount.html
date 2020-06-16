@@ -54,7 +54,18 @@
     If record exists then below html code will be displayed
 
     -->
-    {% if type %}
+    <!--
+        User has to edit atleast one of the fields
+        If user has not edited atleast one field proper message should be displayed
+    -->
+    {% if accounts %}
+    <script>
+    function get_selected(accounts){
+        account = document.getElementById("account_list");
+        type = document.getElementById("account_type");
+        type.value = accounts[account.selectedIndex][1];
+    }
+    </script>
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Delete Account</b></div>
         <div class="panel-body">
@@ -66,8 +77,10 @@
                         <!-- This data should come from database 
                         Account IDs of current customer should be displayed
                         -->
-                        <select class="form-control" name="account_list">
-						  <option>{{ssn_id}}</option>
+                        <select class="form-control" id="account_list" name="account_list" onchange="get_selected({{accounts}})">
+                            {% for account in accounts %}
+                                <option>{{account[0]}}</option>
+                            {% endfor %}
 						</select>
                     </div>
                  </div>
@@ -78,7 +91,7 @@
                         should come from database 
                         Eg: Current /Savings
                         -->
-                        <input type="text" name="account_type" class="form-control"style=" box-sizing: border-box;" value={{type}} readonly>
+                        <input type="text" id="account_type" name="account_type" class="form-control"style=" box-sizing: border-box;" value={{accounts[0][1]}} readonly>
                     </div>
                 </div>
                 <br>
