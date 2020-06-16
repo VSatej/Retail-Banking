@@ -5,23 +5,6 @@
     <style type="text/css">
         .important { color: #336699; }
     </style>
-    <script type="text/javascript">
-        var citiesByState = {
-        Odisha: ["Bhubaneswar","Puri","Cuttack"],
-        Maharashtra: ["Mumbai","Pune","Nagpur"],
-        Kerala: ["kochi","Kanpur"]
-        }
-        function makeSubmenu(value) {
-        if(value.length==0) document.getElementById("city").innerHTML = "<option></option>";
-        else {
-        var citiesOptions = "";
-        for(cityId in citiesByState[value]) {
-        citiesOptions+="<option>"+citiesByState[value][cityId]+"</option>";
-        }
-        document.getElementById("city").innerHTML = citiesOptions;
-        }
-        }
-    </script>
 {% endblock %}
 {% block body %}
 {% include "header.html" %}
@@ -59,11 +42,7 @@
                 <div class="form-group required">
                     <label class="control-label col-md-5 " style="text-align: left;">State</label>
                     <div class="col-md-7">
-                        <select class="form-control" id="state" onchange="makeSubmenu(this.value)">
-                                <option value="" disabled selected>Choose State</option>
-                                <option>Odisha</option>
-                                <option>Maharashtra</option>
-                                <option>Kerala</option>
+                        <select class="form-control" id="sts" name ="stt" onchange="print_city('city', this.selectedIndex);">
                         </select>
                     </div>
                 </div>
@@ -71,9 +50,8 @@
                     <label class="control-label col-md-5 " style="text-align: left;">City</label>
                     <div class="col-md-7">
                         <select class="form-control" id="city">
-                            <option value="" disabled selected>Choose City</option>
-                            <option></option>
                         </select>
+                        <script language="javascript">print_state("sts");</script>
                     </div>
                 </div>    
                 <div class="form-group">
