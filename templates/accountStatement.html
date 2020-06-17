@@ -7,7 +7,7 @@
     </style>
 {% endblock %}
 {% block body %}
-{% include "header.html" %}
+{% include "header_cashier.html" %}
 <br>
 <div style="flex-grow: 1">
 <div class="panel panel-default" style="border: 0px;width:25%;background:white;margin:auto;padding-top:1%">
@@ -75,6 +75,7 @@
         </div>
 </div>
 
+{%if transactions%}
 <div class="container mb-3 nt-3" style="border: 0px;width:50%;background:white;margin:auto;">       
           <table class="table table-bordered act_state_table" id="acc_table">
             <strong>
@@ -88,79 +89,14 @@
             </thead>
         </strong>
             <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
+              {% for transaction in transactions%}
+                <tr>
+                <td>{{transaction[1]}}</td>
+                <td>{{transaction[3]}}</td>
+                <td>{{transaction[2]}}</td>
+                <td>{{transaction[4]}}</td>
               </tr>
-            </tbody>
-
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
-            </tbody>
-            
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
-            </tbody>
-
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>10000</td>
-                <td>withdraw</td>
-                <td>2016-10-24</td>
-                <td>50000</td>
-              </tr>
+              {%endfor%}
             </tbody>
           </table>
 </div>
@@ -181,5 +117,6 @@
 </div>
 
 </div>
+{%endif%}
 {% include "footer.html" %}
 {% endblock %}

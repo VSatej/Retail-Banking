@@ -28,7 +28,7 @@
 
     CREATE TABLE Transactions(
         Account_ID INT NOT NULL,
-        Transaction_ID INT(9) ZEROFILL NOT NULL AUTO_INCREMENT Primary Key,
+        Transaction_ID INT(9) NOT NULL AUTO_INCREMENT Primary Key,
         Transaction_Date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         Type VARCHAR(20) NOT NULL,
         Amount INT NOT NULL

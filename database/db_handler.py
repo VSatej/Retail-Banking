@@ -359,9 +359,21 @@ class DBHandler:
         print(mycursor.rowcount, "record inserted.")
 
 
+    def get_transactions(self, Account_ID):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT * FROM Transactions WHERE Account_ID={}".format(Account_ID))
+        result = mycursor.fetchall()
+        
+        return result
+
+
 # mysqldump -u root -p xplore > database/data.sql
 
 # db = DBHandler()
+# db = DBHandler()
+# print(db.get_balance(123122436))
+# print(db.get_transactions(123122436))
 # db.add_customer(345, 345, "Viren", "Pune", 21)
 # print(db.get_customer_from_Customer_ID(345))
 # db.update_customer_from_Customer_ID(345,"Viren Pasalkar","Pune", 21)

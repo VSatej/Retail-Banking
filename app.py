@@ -444,6 +444,14 @@ def cashier_transfer():
 
 @app.route("/accountStatement",methods=['POST','GET'])
 def accountStatement():
+    if request.method == 'POST':
+        acc = request.form["acc_id"]
+        print(acc)
+        db = DBHandler()
+        transactions = db.get_transactions(acc)
+        # transactions = []
+        print(transactions)
+        return render_template("accountStatement.html", transactions=transactions)
     return render_template("accountStatement.html")
 
 if __name__ == '__main__':
