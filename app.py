@@ -1,10 +1,22 @@
 from flask import Flask,render_template,request,flash,redirect,url_for,session
+import functools
 # from flask.ext.session import Session
 from database.db_handler import DBHandler
 #from Bank import Bank
 from numpy.random import randint
 
 app = Flask(__name__)
+
+def login_required(func):
+    @functools.wraps(func)
+    def secure_function(*args, **kwargs):
+        if "username" not in session:
+            return render_template('login.html', name="")
+        return func()
+
+    return secure_function 
+    
+"delete this comment later"
 
 @app.route('/')
 def index():
@@ -45,6 +57,7 @@ def login():
 
 
 @app.route("/createAccount",methods=['POST','GET'])
+@login_required
 def createAccount():
     if request.method == 'POST':
         error = None
@@ -78,6 +91,7 @@ def createAccount():
 
 
 @app.route("/deleteAccount",methods=['POST','GET'])
+@login_required
 def deleteAccount():
     if request.method == 'POST':
         error = None
@@ -131,6 +145,7 @@ def deleteAccount():
 
 
 @app.route("/updateCustomer",methods=['POST','GET'])
+@login_required
 def updateCustomer():
     error = None
     if request.method == 'POST':
@@ -173,6 +188,7 @@ def updateCustomer():
 
 
 @app.route("/deleteCustomer",methods=['POST','GET'])
+@login_required
 def deleteCustomer():
     if request.method == 'POST':
         error = None
@@ -210,6 +226,7 @@ def deleteCustomer():
     return render_template("deleteCustomer.html")
 """
 @app.route("/deleteAccount",methods=['POST','GET'])
+@login_required
 def deleteAccount():
     if request.method == 'POST':
         account_id = request.form['']
@@ -219,6 +236,7 @@ def deleteAccount():
     return render_template("deleteAccount.html")
 """
 @app.route("/accountSearch",methods=['POST','GET'])
+@login_required
 def accountSearch():
     if request.method == 'POST':
         account_id = request.form['']
@@ -228,6 +246,7 @@ def accountSearch():
     return render_template("accountSearch.html")
 
 @app.route("/customerSearch",methods=['POST','GET'])
+@login_required
 def customerSearch():
     if request.method == 'POST':
         ssn_id = request.form['']
@@ -237,6 +256,7 @@ def customerSearch():
     return render_template("customerSearch.html")
 
 @app.route("/createCustomer",methods=['POST','GET'])
+@login_required
 def createCustomer():
     if request.method == "POST":
         ssn_id = request.form["cust_ssn_id"]
@@ -262,18 +282,21 @@ def createCustomer():
     return render_template("createCustomer.html")
 
 @app.route("/customerStatus",methods=['POST','GET'])
+@login_required
 def customerStatus():
     db = DBHandler()
     status = db.get_all_customer_status()
     return render_template("customerStatus.html", data=status)
 
 @app.route("/accountStatus",methods=['POST','GET'])
+@login_required
 def accountStatus():
     db = DBHandler()
     status = db.get_all_account_status()
     return render_template("accountStatus.html",data=status)
 
 @app.route("/cashier_withdraw",methods=['POST','GET'])
+@login_required
 def cashier_withdraw():
     if request.method == 'POST':
         cust_id = request.form['']
@@ -285,6 +308,7 @@ def cashier_withdraw():
     return render_template("cashier_withdraw.html")
 
 @app.route("/accountDetails",methods=['POST','GET'])
+@login_required
 def accountDetails():
     if request.method == 'POST':
         error = None
@@ -339,6 +363,7 @@ def accountDetails():
     return render_template("accountDetails.html")
 
 @app.route("/cashier_deposit",methods=['POST','GET'])
+@login_required
 def cashier_deposit():
     if request.method == 'POST':
         cust_id = request.form['']
@@ -350,6 +375,7 @@ def cashier_deposit():
     return render_template("cashier_deposit.html")
 
 @app.route("/cashier_transfer",methods=['POST','GET'])
+@login_required
 def cashier_transfer():
     if request.method == 'POST':
         cust_id = request.form['']
