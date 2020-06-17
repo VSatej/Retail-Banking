@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Account Statement{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header.html" %}
+<br>
+<div style="flex-grow: 1">
+<div class="panel panel-default" style="border: 0px;width:25%;background:white;margin:auto;padding-top:1%">
+    
+        <div class="panel-body" style="border: 0px">
+            <form class="form-horizontal" style="padding: auto;" name="data_fetch" method="POST">
+                <br>
+                 <div class="form-group required">
+                    <label class="control-label col-md-5" style="text-align: left;">Account ID : </label>
+                    <div class="col-md-7">
+                        <!-- 
+                        User will enter this value
+                        -->
+                        <input type="number" class="form-control" style=" box-sizing: border-box;text-align: left;padding-left: 0px" value="" name="acc_id">
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <div class="radio col-md-12">
+                      <label><input type="radio" name="optradio" onclick="show(1)" checked><b>Last Number of transactions</b></label>
+                    </div>
+                    <div class="radio col-md-12">
+                      <label><input type="radio" name="optradio" onclick="show(2)" name="optradio"><b>Start-End Dates</b></label>
+                    </div>
+                </div>
+                <div class="form-group required" id="no_transt" style="display: block">
+                    <label class="control-label col-md-7" style="text-align: left;">No. of transactions : </label>
+                    <div class="col-md-3" style="padding: 0px">
+                        <select class="form-control" name="no_trans">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group required" id="s_date" style="display: none">
+                    <label class="control-label col-md-5" style="text-align: left;">Start date : </label>
+                    <div class="col-md-7">
+                        <input type="date" class="form-control"style=" box-sizing: border-box;" name="start_date">
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <label class="control-label col-md-5" style="text-align: left;">End date : </label>
+                    <div class="col-md-7">
+                        <input type="date" class="form-control"style=" box-sizing: border-box;" name="end_date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-7" style="text-align: left;color: red">(*)Fields are compulsory</label>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" name="sub_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+
+<div class="container mb-3 nt-3" style="border: 0px;width:50%;background:white;margin:auto;">       
+          <table class="table table-bordered act_state_table" id="acc_table">
+            <strong>
+            <thead class="thead-dark">
+              <tr>
+                <th>Transaction ID</th>
+                <th>Description</th>
+                <th>Date(YYYY-MM-DD)</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+        </strong>
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+            
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>10000</td>
+                <td>withdraw</td>
+                <td>2016-10-24</td>
+                <td>50000</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+
+<div class="panel panel-default" style="border: 0px;width:28%;background:white;margin:auto;">
+    <div class="panel-body">
+        <form class="form-horizontal" style="padding: auto;" name="data_fetch" method="POST">
+        <div class="form-group">
+            <div class="col-md-6">
+            <center><input type="button" class="btn btn-default" onclick="Export()" id="to_pdf" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px" value="Download As PDF File"></center>
+            </div>
+            <div class="col-md-6">
+            <center><input type="button" class="btn btn-default" id="to_excel" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px" value="Download As Excel File"></center>
+            </div>
+            </div>
+            </form>
+    </div>
+</div>
+
+</div>
+{% include "footer.html" %}
+{% endblock %}

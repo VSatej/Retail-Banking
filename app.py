@@ -442,7 +442,9 @@ def cashier_transfer():
         return redirect(request.url) 
     return render_template("cashier_transfer.html")
 
-
+@app.route("/accountStatement",methods=['POST','GET'])
+def accountStatement():
+    return render_template("accountStatement.html")
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
