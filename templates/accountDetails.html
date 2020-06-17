@@ -15,6 +15,13 @@
 -->
 <div class="panel panel-default" style="border: 0px;width:60%;background:white;margin:auto;padding-top:1%">
         <div class="panel-body" style="border: 0px">
+        {% if error %}
+        <center><p class=error><strong>Error:</strong> {{ error }}<center>
+{% endif %}
+{% if message %}
+        <center><p class=error><strong>Messaage:</strong> {{ message }}<center>
+{% endif %}
+            <center><p>
             <form class="form-horizontal" style="padding: auto" name="data_fetch" method="POST">
                 <br>
                  <div class="form-group required">
@@ -23,15 +30,15 @@
                         <!-- 
                         User will enter this value
                         -->
-                        <input type="number" style="text-align: left;" class="form-control"style=" box-sizing: border-box" value="Current" name="cust_ssn_id">
+                        <input type="number" style="text-align: left;" class="form-control"style=" box-sizing: border-box" value="Current" name="cust_id">
                     </div>
                     <label class="control-label- col-md-1" style="text-align: center;padding: 1%;text-align: center">OR</label>
-                    <label class="control-label col-md-2">Account ID : </label>
+                    <label class="control-label col-md-2">SSN ID : </label>
                     <div class="col-md-3">
                         <!-- 
                             User will enter this value
                         -->
-                        <input type="number" minlength="9" maxlength="9" class="form-control"style=" box-sizing: border-box;" value="Current" name="cust_acc_id">
+                        <input type="number" minlength="9" maxlength="9" class="form-control"style=" box-sizing: border-box;" value="Current" name="cust_ssn_id">
                     </div>
                 </div>
                 <br>
@@ -49,7 +56,7 @@
 <!--
 Displays account(s), as a drop drown if input is customer ID/SSN ID
 -->
-
+{%if accounts%}
 <div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
         <div class="panel-body" style="border: 0px">
             <form class="form-horizontal" name="view_account_details_form"  style="padding: auto" method="POST">
@@ -61,8 +68,9 @@ Displays account(s), as a drop drown if input is customer ID/SSN ID
                         Account IDs of current customer should be displayed
                         -->
                         <select class="form-control" name="account_list">
-						  <option>Account 1</option>
-                          <option>Account 2</option>
+						  {% for acc in accounts %}
+                                <option>{{acc[1]}}</option>
+                            {% endfor %}
 						</select>
                     </div>
                 </div>
@@ -75,7 +83,7 @@ Displays account(s), as a drop drown if input is customer ID/SSN ID
             </form>
         </div>
 </div>
-
+{%endif%}
 <!--
 if account ID is input, then display
 relevant account information – Customer ID, Account ID, Account type, Balance
@@ -84,7 +92,7 @@ AND also
 
 when user selects a particular account from drop down list then this information is to be displayed
 -->
-
+{%if account%}
 <div class="panel panel-default" style="border: 0px;width:28%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Account Details</b></div>
         <div class="panel-body">
@@ -95,7 +103,7 @@ when user selects a particular account from drop down list then this information
                             <!-- 
                                 This label should display the Customer ID
                             -->
-                        <label name = "cust_id" class="control-label" style="text-align: left;padding-left:5%">80000</label>
+                        <input name = "cust_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[0]}}></input>
                     </div>
                 </div>
                 <div class="form-group">
@@ -104,7 +112,7 @@ when user selects a particular account from drop down list then this information
                             <!-- 
                                 This label should display the Account ID
                             -->
-                        <label name="acc_id" class="control-label" style="text-align: left;padding-left:5%">1000</label>
+                        <input name="acc_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[1]}}></input>
                     
                     </div>
                 </div>
@@ -114,7 +122,8 @@ when user selects a particular account from drop down list then this information
                             <!-- 
                                 This label should display the Account Type
                             -->
-                        <label name="acc_type" class="control-label" style="text-align: left;padding-left:5%">Savings</label>
+                        {%if account[6] == "S" %}<input name="acc_type" class="form-control" style=" box-sizing: border-box;" readonly value="Savings"></input>{%endif%}
+                        {%if account[6] == "C" %}<input name="acc_type" class="form-control" style=" box-sizing: border-box;" readonly value="Current"></input>{%endif%}
                     </div>
                 </div>
                 <div class="form-group">
@@ -123,26 +132,39 @@ when user selects a particular account from drop down list then this information
                             <!-- 
                                 This label should display the account balance
                             -->
-                        <label name="acc_bal" class="control-label" style="text-align: left;padding-left:5%">10000</label>
+                        <input name="acc_bal" class="form-control" style=" box-sizing: border-box;" readonly value={{account[2]}}></input>
                     </div>
                 </div>
                 <br>
-                <div class="form-group">
+                
                     <div class="col-md-4">
-                    <a href="{{ url_for('cashier_deposit') }}" name="deposit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Deposit</a>
+                    <center><button type="submit" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px" value="Deposit">Deposit</button></center>
                     </div>
                     <div class="col-md-4">
-                    <a href="{{ url_for('cashier_withdraw') }}" name="withdraw" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Withdraw</a>
+                    <center><button type="submit" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px"value="Transfer">Transfer</button></center>
                     </div>
                     <div class="col-md-4">
-                    <a href="{{ url_for('cashier_transfer') }}" name="transfer" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Transfer</a>
+                    <center><button type="submit" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px"value="Withdraw">Withdraw</button></center>
                     </div>
-                </div>
+
+
+
+                    <!-- <div class="col-md-4">
+                    <a href="{{ url_for('cashier_deposit') }}" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Deposit</a>
+                    </div>
+                    <div class="col-md-4">
+                    <a href="{{ url_for('cashier_withdraw') }}" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Withdraw</a>
+                    </div>
+                    <div class="col-md-4">
+                    <a href="{{ url_for('cashier_transfer') }}" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Transfer</a>
+                    </div> -->
+                
             </form>
             </form>
         </div>
 </div>
 <br>
 </div>
+{%endif%}
 {% include "footer.html" %}
 {% endblock %}

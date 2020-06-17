@@ -161,6 +161,15 @@ class DBHandler:
         return result
 
 
+    def get_type(self, login):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("SELECT type FROM userstore WHERE login='{}'".format(login))
+        result = mycursor.fetchall()
+        
+        return result
+
+
     # Customer Table :
     # +-------------+--------------+------+-----+---------+-------+
     # | Field       | Type         | Null | Key | Default | Extra |

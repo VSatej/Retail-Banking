@@ -40,7 +40,7 @@ CREATE TABLE `Account` (
 
 LOCK TABLES `Account` WRITE;
 /*!40000 ALTER TABLE `Account` DISABLE KEYS */;
-INSERT INTO `Account` VALUES (123456789,123456789,10000,'2020-06-16 08:36:29','2030-06-16 00:00:00',10,'C'),(123456789,123458847,4500,'2020-06-16 09:46:20','2030-06-16 00:00:00',10,'S');
+INSERT INTO `Account` VALUES (123123123,123122436,50000,'2020-06-17 03:42:47','2030-06-17 00:00:00',10,'C'),(123123123,123123284,10000,'2020-06-16 11:20:32','2030-06-16 00:00:00',10,'C'),(123456789,123456789,10000,'2020-06-16 08:36:29','2030-06-16 00:00:00',10,'C'),(123456789,123458847,4500,'2020-06-16 09:46:20','2030-06-16 00:00:00',10,'S');
 /*!40000 ALTER TABLE `Account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `AccountStatus` (
 
 LOCK TABLES `AccountStatus` WRITE;
 /*!40000 ALTER TABLE `AccountStatus` DISABLE KEYS */;
-INSERT INTO `AccountStatus` VALUES (123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:22:53'),(123456789,123456789,'S','Active','Account Created Successfully','2020-06-15 14:24:27'),(123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:25:44'),(123456789,123456789,'C','Active','Account Created Successfully','2020-06-16 08:36:29'),(123456789,123459925,'S','Active','Account Created Successfully','2020-06-16 09:03:08'),(123456789,123459925,'S','Removed','Account Removed Successfully','2020-06-16 09:45:51'),(123456789,123458847,'S','Active','Account Created Successfully','2020-06-16 09:46:20');
+INSERT INTO `AccountStatus` VALUES (123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:22:53'),(123456789,123456789,'S','Active','Account Created Successfully','2020-06-15 14:24:27'),(123456789,123456789,'S','Removed','Account Removed Successfully','2020-06-15 14:25:44'),(123456789,123456789,'C','Active','Account Created Successfully','2020-06-16 08:36:29'),(123456789,123459925,'S','Active','Account Created Successfully','2020-06-16 09:03:08'),(123456789,123459925,'S','Removed','Account Removed Successfully','2020-06-16 09:45:51'),(123456789,123458847,'S','Active','Account Created Successfully','2020-06-16 09:46:20'),(123123123,123123284,'C','Active','Account Created Successfully','2020-06-16 11:20:32'),(123123123,123122436,'C','Active','Account Created Successfully','2020-06-17 03:42:47');
 /*!40000 ALTER TABLE `AccountStatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,6 +136,7 @@ CREATE TABLE `userstore` (
   `login` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -146,7 +147,7 @@ CREATE TABLE `userstore` (
 
 LOCK TABLES `userstore` WRITE;
 /*!40000 ALTER TABLE `userstore` DISABLE KEYS */;
-INSERT INTO `userstore` VALUES ('Rohan','RohanPassword','2020-06-13 12:19:42'),('User01','qwerty','2020-06-13 12:23:30');
+INSERT INTO `userstore` VALUES ('Cashier','secret','2020-06-17 05:07:00','Cashier'),('Rohan','RohanPassword','2020-06-13 12:19:42','User'),('User01','qwerty','2020-06-13 12:23:30','User');
 /*!40000 ALTER TABLE `userstore` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -159,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-16 11:07:04
+-- Dump completed on 2020-06-17  5:31:24

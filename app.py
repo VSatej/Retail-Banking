@@ -20,7 +20,7 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/login',methods=['POST'])
+@app.route('/login',methods=['POST',"GET"])
 def login():
     error = None
     if request.method == 'POST':
@@ -30,7 +30,11 @@ def login():
         server_pass = db.get_password(login)
         if len(server_pass) != 0 and server_pass[0][0] == password:
             flash('Logged In Successfully')
-            return render_template('client.html',name=login)
+            acc_type = db.get_type(login)
+            if acc_type[0][0] == "Cashier":
+                return redirect(url_for('accountDetails'))
+            else:
+                return render_template('createAccount.html')
         else:
             error = "Invalid Credentials"
             return redirect(request.url)
@@ -281,7 +285,57 @@ def cashier_withdraw():
     return render_template("cashier_withdraw.html")
 
 @app.route("/accountDetails",methods=['POST','GET'])
-def accountDetails(): 
+def accountDetails():
+    if request.method == 'POST':
+        error = None
+        di = request.form.to_dict()
+        if "cust_ssn_id" in di.keys():
+            SSN_ID = request.form["cust_ssn_id"]
+            Customer_ID = request.form["cust_id"]
+            if not SSN_ID and not Customer_ID:
+                error = "Enter either Customer ID or SSN ID to fetch acount"
+                return render_template("accountDetails.html",error=error)
+            elif SSN_ID:
+                db = DBHandler()
+                customer = db.get_customer_from_SSN_ID(SSN_ID)
+                print(customer)
+                if len(customer) == 0:
+                    error = "Invalid SSN ID"
+                    return render_template("accountDetails.html",error=error)
+                else:
+                    db = DBHandler()
+                    accounts = db.get_all_accounts(SSN_ID)
+                    return render_template("accountDetails.html",accounts=accounts)
+            elif Customer_ID:
+                db = DBHandler()
+                customer = db.get_customer_from_Customer_ID(Customer_ID)
+                if len(customer) == 0:
+                    error = "Invalid Customer ID"
+                    return render_template("accountDetails.html",error=error)
+                else:
+                    db = DBHandler()
+                    accounts = db.get_all_accounts(Customer_ID)
+                    return render_template("accountDetails.html",accounts=accounts)
+
+        elif "account_list" in di.keys():
+            account_id = request.form["account_list"]
+            db = DBHandler()
+            account = db.get_account(account_id)
+            return render_template("accountDetails.html", account=account[0])
+
+        elif "action" in di.keys():
+            cust = request.form["cust_id"]
+            acc = request.form["acc_id"]
+            typ = request.form["acc_type"]
+            bal = request.form["acc_bal"]
+            account = [cust,acc,typ,bal]
+            if request.form["action"] == 'Deposit':
+                return render_template("cashier_deposit.html",account=account)
+            elif request.form['action'] == 'Transfer':
+                return render_template("cashier_transfer.html",account=account)
+            elif request.form['action'] == 'Withdraw':
+              return render_template("cashier_withdraw.html",account=account)
+
     return render_template("accountDetails.html")
 
 @app.route("/cashier_deposit",methods=['POST','GET'])
