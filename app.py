@@ -15,7 +15,7 @@ def login_required(func):
         return func()
 
     return secure_function 
-    
+
 "delete this comment later"
 
 @app.route('/')
@@ -42,6 +42,9 @@ def login():
         server_pass = db.get_password(login)
         if len(server_pass) != 0 and server_pass[0][0] == password:
             flash('Logged In Successfully')
+
+            session["username"] = login
+            
             acc_type = db.get_type(login)
             if acc_type[0][0] == "Cashier":
                 return redirect(url_for('accountDetails'))
