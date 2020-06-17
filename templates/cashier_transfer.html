@@ -13,6 +13,12 @@
     <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
         <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Transfer Money</b></div>
         <div class="panel-body">
+        {% if error %}
+        <center><p class=error><strong>Error:</strong> {{ error }}<center>
+{% endif %}
+{% if message %}
+        <center><p class=error><strong>Messaage:</strong> {{ message }}<center>
+{% endif %}
             <form class="form-horizontal" name="transfer_form" style="padding: auto" method="POST" action="">
                 <div class="form-group">
                     <label class="control-label col-md-5 " style="text-align: left;">Customer ID </label>
@@ -21,34 +27,34 @@
                         This value should come from database
                     -->
                     <div class="col-md-7">
-                        <input type="number" class="form-control" value={{customer_id}} name="cust_ssn_id" style=" box-sizing: border-box;" readonly>
+                        <input name = "customer_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[0]}}></input>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-5 " style="text-align: left;">Source Account Type </label>
+                    <label class="control-label col-md-5 " style="text-align: left;">Source Account</label>
                     <!--
                         Source Account Type
                         This value should come from database
-                    -->{{accounts}}
+                    -->
                     <div class="col-md-7">
                         <select class="form-control" name="source_account_list">
-                            {% for account in accounts %}
-                                {{account[1]}}
-                                <option>{{account[1]}}</option>
+                            {% for acc in accounts %}
+                                <option>{{acc[1]}}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-5 " style="text-align: left;">Target Account Type </label>
+                    <label class="control-label col-md-5 " style="text-align: left;">Target Account </label>
                     <!--
                         Source Account Type
                         This value should come from database
                     -->
                     <div class="col-md-7">
                         <select class="form-control" name="target_account_list">
-                          <option>Savings-123456789</option>
-                          <option>Savings-123456789</option>
+                          {% for acc in accounts %}
+                                <option>{{acc[1]}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -78,67 +84,7 @@
 
     <!-- if money transfer successful then display this code-->
 
-    <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
-        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Transfer Details</b></div>
-        <div class="panel-body">
-            <form class="form-horizontal" name="transfer_form" style="padding: auto" method="POST" action="">
-                <div class="form-group">
-                    <label class="control-label col-md-7 " style="text-align: left;">Source Account ID </label>
-                    <!--
-                        Customer ID
-                        This value should come from database
-                    -->
-                    <div class="col-md-5">
-                        <label class="control-label" name="src_id" style="text-align: left;padding-left:5%">1000</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-7 " style="text-align: left;">Target Account ID </label>
-                    <!--
-                        Customer ID
-                        This value should come from database
-                    -->
-                    <div class="col-md-5">
-                        <label class="control-label" name="tgt_id" style="text-align: left;padding-left:5%">2000</label>
-                    </div>
-                </div>
-                <!-- display account ID in this label-->
-                <div class="form-group">
-                <label class="control-label col-md-7 " style="text-align: left;">Balance before transfer for Account ID 1 </label>
-                    <!--
-                        Customer ID
-                        This value should come from database
-                    -->
-                    <div class="col-md-5">
-                        <label class="control-label" name="src_old_bal" style="text-align: left;padding-left:5%">1000</label>
-                    </div>
-                </div>
-                <!-- display account ID in this label-->
-                <div class="form-group">
-                    <label class="control-label col-md-7 " style="text-align: left;">Balance before transfer for Account ID 2</label>
-                    <!--
-                        Customer ID
-                        This value should come from database
-                    -->
-                    <div class="col-md-5">
-                        <label class="control-label" name="tgt_old_bal" style="text-align: left;padding-left:5%">2000</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-12 " style="text-align: center;font-size: 18px">Amount transfer completed successfully!!</label>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- 
-        If insufficient balance then display this    
-    -->
-    <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
-        <div class="panel-body">
-            <label class="control-label col-md-12 " style="text-align: center;font-size: 18px">Transfer not allowed, please choose smaller amount.</label>
-        </div>
-    </div>
+   
 
     <br>
     <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">

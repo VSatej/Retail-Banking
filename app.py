@@ -362,7 +362,9 @@ def accountDetails():
             if request.form["action"] == 'Deposit':
                 return render_template("cashier_deposit.html",account=account)
             elif request.form['action'] == 'Transfer':
-                return render_template("cashier_transfer.html",account=account)
+                db = DBHandler()
+                accounts = db.get_all_accounts(cust)
+                return render_template("cashier_transfer.html",account=account,  accounts=accounts)
             elif request.form['action'] == 'Withdraw':
                 return render_template("cashier_withdraw.html",account=account)
 
@@ -390,6 +392,26 @@ def accountDetails():
                 return render_template("accountDetails.html",message="Withdraw Successful")
             else:
                 return render_template("accountDetails.html",error="Insufficient Balance")
+
+        
+        if "transfer_amount" in di.keys():
+            cust = request.form["customer_id"]
+            acc = request.form["source_account_list"]
+            dest = request.form["target_account_list"]
+            amount = request.form["transfer_amount"]
+            db = DBHandler()
+            bal = db.get_balance(acc)[0][0]
+            if int(bal) >= int(amount):
+                db.set_balance(acc,int(int(bal)-int(amount)))
+                bal = db.get_balance(acc)[0][0]
+                db.set_balance(dest,int(int(bal)+int(amount)))
+                db.add_transaction(acc, "Transfer", amount)
+                db.add_transaction(dest, "Transfer", amount)
+                new_bal = db.get_balance(acc)[0][0]
+                return render_template("accountDetails.html",message="Transfer Successful, New Balance : {}".format(new_bal))
+            else:
+                return render_template("accountDetails.html",error="Insufficient Balance")
+
     return render_template("accountDetails.html")
 
 
