@@ -42,19 +42,15 @@ def login():
         server_pass = db.get_password(login)
         if len(server_pass) != 0 and server_pass[0][0] == password:
             flash('Logged In Successfully')
-
             session["username"] = login
-            
             acc_type = db.get_type(login)
             if acc_type[0][0] == "Cashier":
-                return redirect(url_for('accountDetails'))
+                return render_template("accountDetails.html")
             else:
                 return render_template('createAccount.html')
         else:
             error = "Invalid Credentials"
-            return redirect(request.url)
-        if login == 'admin' and password=='admin@123':
-            render_template('admin.html')
+            return render_template("login.html")
     return render_template('login.html', error=error)
 
 
@@ -227,17 +223,9 @@ def deleteCustomer():
             message="Customer Deleted Successfully!"
             return render_template("deleteCustomer.html",message=message)
     return render_template("deleteCustomer.html")
-"""
-@app.route("/deleteAccount",methods=['POST','GET'])
-@login_required
-def deleteAccount():
-    if request.method == 'POST':
-        account_id = request.form['']
-        account_type = request.form['']
-        #Bank.deleteAccount(account_id,account_type)
-        return redirect(request.url) 
-    return render_template("deleteAccount.html")
-"""
+
+
+
 @app.route("/accountSearch",methods=['POST','GET'])
 @login_required
 def accountSearch():
@@ -248,6 +236,8 @@ def accountSearch():
         return redirect(request.url) 
     return render_template("accountSearch.html")
 
+
+
 @app.route("/customerSearch",methods=['POST','GET'])
 @login_required
 def customerSearch():
@@ -257,6 +247,8 @@ def customerSearch():
         #Bank.customerSearch()
         return redirect(request.url) 
     return render_template("customerSearch.html")
+
+
 
 @app.route("/createCustomer",methods=['POST','GET'])
 @login_required
@@ -284,6 +276,8 @@ def createCustomer():
             return render_template("createCustomer.html",message=message)
     return render_template("createCustomer.html")
 
+
+
 @app.route("/customerStatus",methods=['POST','GET'])
 @login_required
 def customerStatus():
@@ -291,12 +285,16 @@ def customerStatus():
     status = db.get_all_customer_status()
     return render_template("customerStatus.html", data=status)
 
+
+
 @app.route("/accountStatus",methods=['POST','GET'])
 @login_required
 def accountStatus():
     db = DBHandler()
     status = db.get_all_account_status()
     return render_template("accountStatus.html",data=status)
+
+
 
 @app.route("/cashier_withdraw",methods=['POST','GET'])
 @login_required
@@ -309,6 +307,8 @@ def cashier_withdraw():
         #Bank.withdraw()
         return redirect(request.url) 
     return render_template("cashier_withdraw.html")
+
+
 
 @app.route("/accountDetails",methods=['POST','GET'])
 @login_required
@@ -350,7 +350,10 @@ def accountDetails():
             account = db.get_account(account_id)
             return render_template("accountDetails.html", account=account[0])
 
-        elif "action" in di.keys():
+    # elif request.method == "GET":
+        # di = request.form.to_dict()
+        # print(di.keys())
+        if "cust_id" in di.keys():
             cust = request.form["cust_id"]
             acc = request.form["acc_id"]
             typ = request.form["acc_type"]
@@ -361,9 +364,35 @@ def accountDetails():
             elif request.form['action'] == 'Transfer':
                 return render_template("cashier_transfer.html",account=account)
             elif request.form['action'] == 'Withdraw':
-              return render_template("cashier_withdraw.html",account=account)
+                return render_template("cashier_withdraw.html",account=account)
 
+        if "deposit_amount" in di.keys():
+            cust = request.form["customer_id"]
+            acc = request.form["acc_id"]
+            typ = request.form["acc_type"]
+            bal = request.form["acc_bal"]
+            amount = request.form["deposit_amount"]
+            db = DBHandler()
+            db.set_balance(acc,int(int(bal)+int(amount)))
+            db.add_transaction(acc, "Deposit", amount)
+            return render_template("accountDetails.html",message="Deposit Successful")
+
+        if "withdraw_amount" in di.keys():
+            cust = request.form["customer_id"]
+            acc = request.form["acc_id"]
+            typ = request.form["acc_type"]
+            bal = request.form["acc_bal"]
+            amount = request.form["withdraw_amount"]
+            if int(bal) >= int(amount):
+                db = DBHandler()
+                db.set_balance(acc,int(int(bal)-int(amount)))
+                db.add_transaction(acc, "Withdraw", amount)
+                return render_template("accountDetails.html",message="Withdraw Successful")
+            else:
+                return render_template("accountDetails.html",error="Insufficient Balance")
     return render_template("accountDetails.html")
+
+
 
 @app.route("/cashier_deposit",methods=['POST','GET'])
 @login_required
@@ -377,6 +406,8 @@ def cashier_deposit():
         return redirect(request.url) 
     return render_template("cashier_deposit.html")
 
+
+
 @app.route("/cashier_transfer",methods=['POST','GET'])
 @login_required
 def cashier_transfer():
@@ -388,6 +419,8 @@ def cashier_transfer():
         #Bank.withdraw()
         return redirect(request.url) 
     return render_template("cashier_transfer.html")
+
+
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

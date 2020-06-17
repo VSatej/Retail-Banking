@@ -319,7 +319,44 @@ class DBHandler:
         print(mycursor.rowcount, "record(s) deleted")
 
     
+    def get_balance(self, Account_ID):
+        mycursor = self.db.cursor(self)
 
+        mycursor.execute("SELECT Balance FROM Account WHERE Account_ID={}".format(Account_ID))
+        result = mycursor.fetchall()
+        
+        return result
+
+    
+    def set_balance(self, Account_ID, Balance):
+        mycursor = self.db.cursor(self)
+
+        mycursor.execute("UPDATE Account SET Balance={} WHERE Account_ID={}".format(Balance, Account_ID))
+        self.db.commit()
+
+        print(mycursor.rowcount, "record(s) affected")
+
+    # Transactions Table:
+    # +------------------+-------------+------+-----+-------------------+-------------------+
+    # | Field            | Type        | Null | Key | Default           | Extra             |
+    # +------------------+-------------+------+-----+-------------------+-------------------+
+    # | Account_ID       | int         | NO   |     | NULL              |                   |
+    # | Transaction_ID   | int         | NO   | PRI | NULL              | auto_increment    |
+    # | Transaction_Date | datetime    | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+    # | Type             | varchar(20) | NO   |     | NULL              |                   |
+    # | Amount           | int         | NO   |     | NULL              |                   |
+    # +------------------+-------------+------+-----+-------------------+-------------------+
+
+    def add_transaction(self,Account_ID,Type,Amount):
+        mycursor = self.db.cursor()
+
+        sql = "INSERT INTO Transactions(Account_ID, Type, Amount) VALUES (%s, %s, %s)"
+        val = (Account_ID, Type, Amount)
+        mycursor.execute(sql, val)
+
+        self.db.commit()
+
+        print(mycursor.rowcount, "record inserted.")
 
 
 # mysqldump -u root -p xplore > database/data.sql

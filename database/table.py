@@ -27,11 +27,11 @@
     );
 
     CREATE TABLE Transactions(
-        Customer_ID INT NOT NULL,
-        Account_Type VARCHAR(20) NOT NULL,
-        Transaction_Date DATE NOT NULL,
-        Source_AccountType VARCHAR(20) NOT NULL,
-        Target_AccountType VARCHAR(20) NOT NULL
+        Account_ID INT NOT NULL,
+        Transaction_ID INT(9) ZEROFILL NOT NULL AUTO_INCREMENT Primary Key,
+        Transaction_Date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        Type VARCHAR(20) NOT NULL,
+        Amount INT NOT NULL
     );
 
     CREATE TABLE CustomerStatus(

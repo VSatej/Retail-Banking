@@ -20,7 +20,7 @@
                             <!-- 
                                 This label should display the Customer ID
                             -->
-                        <label class="control-label" name="cust_id" style="text-align: left;padding-left:5%">{{account[0]}}</label>
+                        <input name = "customer_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[0]}}></input>
                     </div>
                 </div>
                 <div class="form-group">
@@ -29,7 +29,7 @@
                             <!-- 
                                 This label should display the Account ID
                             -->
-                        <label class="control-label" name="acc_id" style="text-align: left;padding-left:5%">{{account[1]}}</label>
+                        <input name="acc_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[1]}}></input>
                     
                     </div>
                 </div>
@@ -39,7 +39,8 @@
                             <!-- 
                                 This label should display the Account Type
                             -->
-                        <label class="control-label" name="acc_type" style="text-align: left;padding-left:5%">{{account[2]}}</label>
+                        <input name="acc_type" class="form-control" style=" box-sizing: border-box;" readonly value={{account[2]}}></input>
+                    
                     </div>
                 </div>
                 <div class="form-group">
@@ -48,7 +49,7 @@
                             <!-- 
                                 This label should display the account balance
                             -->
-                        <label class="control-label" name="acc_bal" style="text-align: left;padding-left:5%">{{account[3]}}</label>
+                        <input name="acc_bal" class="form-control" style=" box-sizing: border-box;" readonly value={{account[3]}}></input>
                     </div>
                 </div>
                 <div class="form-group ">
@@ -72,11 +73,11 @@
 <!--
     If deposit successful display this
 -->
-<div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+<!-- <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
         <div class="panel-body">
             <label class="control-label col-md-12 " style="text-align: center;font-size: 18px">Amount deposited successfully</label>
         </div>
-</div>
+</div> -->
 <br>
 <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
         <div class="panel-body">

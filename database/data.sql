@@ -126,6 +126,33 @@ INSERT INTO `CustomerStatus` VALUES (123123123,123123123,'Active','Customer Crea
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Transactions`
+--
+
+DROP TABLE IF EXISTS `Transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Transactions` (
+  `Account_ID` int NOT NULL,
+  `Transaction_ID` int(9) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `Transaction_Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Type` varchar(20) NOT NULL,
+  `Amount` int NOT NULL,
+  PRIMARY KEY (`Transaction_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Transactions`
+--
+
+LOCK TABLES `Transactions` WRITE;
+/*!40000 ALTER TABLE `Transactions` DISABLE KEYS */;
+INSERT INTO `Transactions` VALUES (123122436,000000001,'2020-06-17 07:45:24','Withdraw',1000),(123122436,000000002,'2020-06-17 07:48:06','Withdraw',50000),(123122436,000000003,'2020-06-17 07:48:29','Deposit',50000);
+/*!40000 ALTER TABLE `Transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `userstore`
 --
 
@@ -160,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-17  5:31:24
+-- Dump completed on 2020-06-17  7:49:05
