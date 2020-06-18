@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Account Details{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header_cashier.html" %}
+<br>
+<div style="flex-grow: 1">
+<div class="panel panel-default" style="border: 0px;width:28%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Welcome to FedChoice Bank</b></div>
+</div>
+
+
+<br>
+
+</div>
+{% include "footer.html" %}
+{% endblock %}

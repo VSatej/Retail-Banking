@@ -454,6 +454,14 @@ def accountStatement():
         return render_template("accountStatement.html", transactions=transactions)
     return render_template("accountStatement.html")
 
+@app.route("/home_cashier",methods=['POST','GET'])
+def home_cashier():
+    return render_template("home_cashier.html")
+
+@app.route("/home",methods=['POST','GET'])
+def home():
+    return render_template("home.html")
+
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
