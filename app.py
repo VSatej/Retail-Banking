@@ -462,6 +462,10 @@ def home_cashier():
 def home():
     return render_template("home.html")
 
+@app.route("/logout",methods=['POST','GET'])
+def logout():
+    return render_template("login.html")
+
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
