@@ -11,7 +11,7 @@ def login_required(func):
     @functools.wraps(func)
     def secure_function(*args, **kwargs):
         if "username" not in session:
-            return render_template('login.html', name="")
+            return redirect('login.html')
         return func()
 
     return secure_function 
@@ -20,16 +20,45 @@ def login_required(func):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    error = None
+    if request.method == 'POST':
+        login = request.form["username"]
+        password = request.form["password"]
+        db = DBHandler()
+        server_pass = db.get_password(login)
+        if len(server_pass) != 0 and server_pass[0][0] == password:
+            flash('Logged In Successfully')
+            session["username"] = login
+            acc_type = db.get_type(login)
+            if acc_type[0][0] == "Cashier":
+                return render_template("home_cashier.html")
+            else:
+                return render_template('home.html')
+        else:
+            error = "Invalid Credentials"
+            return render_template("login.html")
+    return render_template('login.html', error=error)
 
 @app.route('/register',methods=['POST','GET'])
 def register():
+    error = None
     if request.method == 'POST':
-        name = request.form['name']
-        paswd = request.form['paswd']
-        #Bank.check_password(name,paswd)
-        return render_template('login.html',name=name,msg="Successfully Logged In")
-    return render_template('register.html')
+        login = request.form["username"]
+        password = request.form["password"]
+        db = DBHandler()
+        server_pass = db.get_password(login)
+        if len(server_pass) != 0 and server_pass[0][0] == password:
+            flash('Logged In Successfully')
+            session["username"] = login
+            acc_type = db.get_type(login)
+            if acc_type[0][0] == "Cashier":
+                return render_template("home_cashier.html")
+            else:
+                return render_template('home.html')
+        else:
+            error = "Invalid Credentials"
+            return render_template("login.html")
+    return render_template('login.html', error=error)
 
 
 @app.route('/login',methods=['POST',"GET"])
@@ -45,9 +74,9 @@ def login():
             session["username"] = login
             acc_type = db.get_type(login)
             if acc_type[0][0] == "Cashier":
-                return render_template("accountDetails.html")
+                return render_template("home_cashier.html")
             else:
-                return render_template('createAccount.html')
+                return render_template('home.html')
         else:
             error = "Invalid Credentials"
             return render_template("login.html")
@@ -443,28 +472,60 @@ def cashier_transfer():
     return render_template("cashier_transfer.html")
 
 @app.route("/accountStatement",methods=['POST','GET'])
+@login_required
 def accountStatement():
     if request.method == 'POST':
         acc = request.form["acc_id"]
         print(acc)
-        db = DBHandler()
-        transactions = db.get_transactions(acc)
-        # transactions = []
-        print(transactions)
-        return render_template("accountStatement.html", transactions=transactions)
+        if len(acc) == 9:
+            db = DBHandler()
+            transactions = db.get_transactions(acc)
+            if len(transactions) != 0:
+            # transactions = []
+                print(transactions)
+                return render_template("accountStatement.html", transactions=transactions)
+            else:
+                error = "No transactions/Invalid Account ID"
+                return render_template("accountStatement.html", error=error)
+        else:
+            error = "Invalid Account ID"
+            return render_template("accountStatement.html", error=error)
     return render_template("accountStatement.html")
 
 @app.route("/home_cashier",methods=['POST','GET'])
+@login_required
 def home_cashier():
     return render_template("home_cashier.html")
 
 @app.route("/home",methods=['POST','GET'])
+@login_required
 def home():
     return render_template("home.html")
 
 @app.route("/logout",methods=['POST','GET'])
+@login_required
 def logout():
-    return render_template("login.html")
+    error = None
+    session["username"] = None
+    session.clear()
+    if request.method == 'POST':
+        login = request.form["username"]
+        password = request.form["password"]
+        db = DBHandler()
+        server_pass = db.get_password(login)
+        if len(server_pass) != 0 and server_pass[0][0] == password:
+            flash('Logged In Successfully')
+            session["username"] = login
+            acc_type = db.get_type(login)
+            if acc_type[0][0] == "Cashier":
+                return render_template("home_cashier.html")
+            else:
+                return render_template('home.html')
+        else:
+            error = "Invalid Credentials"
+            return render_template("login.html")
+    return render_template('login.html', error=error)
+
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

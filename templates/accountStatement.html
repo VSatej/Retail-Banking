@@ -13,6 +13,9 @@
 <div class="panel panel-default" style="border: 0px;width:25%;background:white;margin:auto;padding-top:1%">
     
         <div class="panel-body" style="border: 0px">
+        {% if error %}
+            <center><p class=error><strong>Error:</strong> {{ error }}</center>
+        {% endif %}
             <form class="form-horizontal" style="padding: auto;" name="data_fetch" method="POST">
                 <br>
                  <div class="form-group required">
